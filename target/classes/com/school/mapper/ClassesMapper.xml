@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.dao.ClassesMapper">
+	<resultMap type="com.school.pojo.Classes" id="BaseResultMap">
+		<id property="id" column="id" javaType="int" jdbcType="INTEGER"/>
+		<result property="classname" column="classname" javaType="string" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap type="com.school.pojo.Classes" id="StudentResultMap" extends="BaseResultMap">
+		<collection property="student" ofType="com.school.pojo.Student">
+			<id property="sid" column="sid" javaType="string" jdbcType="VARCHAR"/>
+			<result property="sname" column="sname" javaType="string" jdbcType="VARCHAR"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.school.pojo.Classes" id="CourseResultMap" extends="BaseResultMap">
+		<collection property="course" ofType="com.school.pojo.Course">
+			<id property="cno" column="cno" />
+			<result property="cname" column="cname"/>
+		</collection>
+	</resultMap>
+	<resultMap type="com.school.pojo.Classes" id="TeacherResultMap" extends="BaseResultMap">
+		<collection property="teachers" ofType="com.school.pojo.Teachers">
+			<id property="tno" column="tno"/>
+			<result property="tname" column="tname"/>
+		</collection>
+	</resultMap>	
+	<sql id="Base_Column_List">
+		id,classname
+	</sql>
+	<!-- 获取班级的教师 -->
+	<select id="getClassTeachers" resultMap="TeacherResultMap" parameterType="java.lang.Integer">
+		SELECT
+			c.classname,t.tname
+		FROM 
+			teachers t
+		INNER JOIN 
+			teacher_class tc
+		on 
+			t.tno =tc.teachertno
+		INNER JOIN 
+			class c
+		on 
+			tc.classid = c.id
+		where 
+			c.id=#{c.id,jdbcType=INTEGER}
+	</select>
+	<select id="getClassesById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		from class
+		where id=#{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getClassesList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from class order by id 
+	</select>
+	<select id="countClassesStudent" resultType="Integer" parameterType="java.lang.Integer">
+		select
+			count(s.class_id) as num
+		from 
+			class c 
+		inner join
+			student s
+		on 
+			c.id=s.class_id
+		where
+			c.id=#{c.id,jdbcType=INTEGER}
+	
+	</select>
+	<!-- 班级人员 -->
+	<select id="getClassesStudents" resultMap="StudentResultMap" parameterType="java.lang.Integer">
+		select c.id,c.classname,s.sid,s.sname
+		from student s
+		inner join class c
+		on s.class_id=c.id
+		where c.id=#{c.id,jdbcType=INTEGER}		
+	</select>
+	<select id="getclassesCourses" resultMap="CourseResultMap" parameterType="java.lang.Integer">
+		select c.cname
+		from course c
+		inner join class_course cc
+		on c.cno=cc.courseno
+		inner join class cls
+		on cc.classid=cls.id
+		where cls.id=#{cls.id,jdbcType=INTEGER}
+	</select>
+	
+	
+	<insert id="addClasses" parameterType="com.school.pojo.Classes">
+		insert into class
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id !=null">id,</if>
+			<if test="classname !=null">classname</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id !=null">#{id,jdbcType=INTEGER},</if>
+			<if test="classname !=null">#{classname,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+	<delete id="deleteClasses" parameterType="java.lang.Integer">
+		delete from class
+		where id=#{id,jdbcType=INTEGER}
+	</delete>
+	<update id="updateClasses" parameterType="com.school.pojo.Classes">
+		update class
+		<set>
+			<if test="classname!=null">
+				classname=#{classname,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id= #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

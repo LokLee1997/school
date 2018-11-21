@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:jee="http://www.springframework.org/schema/jee"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	   http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	   http://www.springframework.org/schema/jee
+	   http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	 
+	 <context:component-scan base-package="com.school.service.impl"/>
+	 <context:component-scan base-package="com.school.service"/>
+	 <context:component-scan base-package="com.school.dao"/>
+	 <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+				<property name="location" value="classpath:jdbc.properties"></property>
+			</bean>
+	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	 	<property name="url" value="${url}"/>
+	 	<property name="username" value="${username}"/>
+	 	<property name="password" value="${password}"/>
+	 	<property name="driverClassName" value="${driverClassName}"/>
+	 	<property name="maxActive" value="${maxActive}"/>
+	 	<property name="initialSize" value="${initialSize}"/>
+	 	<property name="maxWait" value="${maxWait}"/>
+	 	<property name="minIdle" value="${minIdle}"/>
+	 	<property name="maxIdle" value="${maxIdle}"/>
+	 	<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+	 </bean>
+	 
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	 	<property name="dataSource" ref="dataSource"/>
+	 	<property name="configLocation" value="classpath:mybatis-config.xml"/>
+	 	<property name="mapperLocations" value="classpath:com/school/mapper/*.xml"/>
+	 </bean>
+	 <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	 	<property name="basePackage" value="com.school.dao"/>
+	 	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	 </bean>	
+	 <bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	 <!--  配置参与事务的类 -->
+	 <aop:config>
+		 <aop:pointcut id="allServiceMethod" expression="execution(* com.school.service.*.*(..))"/>
+		 <aop:advisor pointcut-ref="allServiceMethod" advice-ref="TxAdvice" />
+	 </aop:config>
+	
+	<!-- 使用声明方式配置事务 -->
+	<tx:advice id="TxAdvice" transaction-manager="transactionManager">
+	     <tx:attributes>
+		       <tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+	     </tx:attributes>
+ 	</tx:advice>
+</beans>

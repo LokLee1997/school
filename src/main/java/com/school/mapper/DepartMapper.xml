@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.dao.DepartMapper">
+	<resultMap type="com.school.pojo.Depart" id="BaseResultMap">
+		<id property="did" column="did" javaType="int" jdbcType="INTEGER"/>
+		<result property="dname" column="dname" javaType="string" jdbcType="VARCHAR"/>
+	</resultMap>
+	<resultMap type="com.school.pojo.Depart" id="TeacherResultMap" extends="BaseResultMap">
+		<collection property="teachers" ofType="com.school.pojo.Teachers">
+			<id property="tno" column="tno" javaType="int" jdbcType="INTEGER"/>
+			<result property="tname" column="tname" javaType="string" jdbcType="VARCHAR"/>
+		</collection>
+	</resultMap>
+	<sql id="Base_Column_List">
+		did,dname
+	</sql>
+	<!-- 获取部门人数 -->
+	<select id="countDepartnum" resultType="Integer" parameterType="java.lang.Integer">
+		select
+			count(t.depart) as num
+		from 
+			teachers t 
+		inner join
+			depart d
+		on 
+			t.depart=d.did
+		where
+			d.did=#{d.did,jdbcType=INTEGER}
+	</select>
+	<!--获取部门人员 -->
+	<select id="getDeparTeachers" resultMap="TeacherResultMap" parameterType="java.lang.Integer">
+		 select
+ 			t.tno,t.tname
+ 		from
+ 			teachers t
+ 		inner join
+ 			depart d
+ 		on 
+ 			t.depart=d.did
+ 		where 
+ 		d.did=#{d.did,jdbcType=INTEGER}		
+	</select>
+	<!--根据部门id获取部门  -->
+	<select id="getDepartById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		from depart
+		where did=#{did,jdbcType=INTEGER}
+	</select>
+	<!-- 部门列表 -->
+	<select id="getDeparts" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from depart order by did 
+	</select>
+	<!-- 添加部门 -->
+	<insert id="addDep" parameterType="com.school.pojo.Depart">
+		insert into depart
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="did !=null">did,</if>
+			<if test="dname !=null">dname</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="did !=null">#{did,jdbcType=INTEGER},</if>
+			<if test="dname !=null">#{dname,jdbcType=VARCHAR},</if>
+		</trim>
+	</insert>
+	<!-- 删除 -->
+	<delete id="deleteDep" parameterType="java.lang.Integer">
+		delete from depart
+		where did=#{did,jdbcType=INTEGER}
+	</delete>
+	<!-- 更新 -->
+	<update id="updateDep" parameterType="com.school.pojo.Depart">
+		update depart
+		<set>
+			<if test="dname!=null">
+				dname=#{dname,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where did= #{did,jdbcType=INTEGER}
+	</update>
+</mapper>

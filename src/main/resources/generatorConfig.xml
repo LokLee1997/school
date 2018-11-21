@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+	PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	 <classPathEntry
+            location="E:\DevelopmentTools\maven-repository\mysql\mysql-connector-java\8.0.11\mysql-connector-java-8.0.11.jar"/>
+	<context id="Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<!-- 是否去除注释 -->
+			<property name="suppressAllComments" value="true"/>
+		</commentGenerator>
+		<!-- 数据库连接信息 -->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" 
+						connectionURL="jdbc:mysql://localhost:3306/school?serverTimezone=UTC"
+						userId="root"
+						password="root">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false"/>
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage="com.school.pojo" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false"/>
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.school.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false"/>
+		
+		</sqlMapGenerator>
+		
+		<javaClientGenerator targetPackage="com.school.mapper" type="XMLMAPPER" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false"/>
+		</javaClientGenerator>
+		
+		<!-- 指定数据库表 -->
+		<table tableName="class_course"
+			   enableInsert="true"
+			   enableDeleteByPrimaryKey="true"
+			   enableSelectByPrimaryKey="true"
+			   enableUpdateByPrimaryKey="true"
+			   enableCountByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   enableUpdateByExample="false"/>
+			   
+	</context>
+
+</generatorConfiguration>
