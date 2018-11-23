@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,6 +30,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div><label>学生性别:</label>${student.ssex}</div>
     <div><label>出生日期:</label>${student.sbirthday}</div>
     <div><label>学生班级:</label>${student.classes.classname}</div>
+    <div>需缴纳费用:
+    	<c:forEach items="${cList}" var="c">
+    		<c:forEach items="${c.charge}" var="ch">
+    			缴费项目:${ch.chargeitem}<br>
+    			缴费金额:${ch.price }<br>
+    			缴费状态:${ch.ispay }<br>
+    		</c:forEach>
+    	</c:forEach>
+    </div>
    </div>
   </body>
 </html>

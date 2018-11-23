@@ -14,10 +14,28 @@
 			<result property="classname" column="classname" javaType="string" jdbcType="VARCHAR"/>
 		</association>
 	</resultMap>
+	<resultMap type="com.school.pojo.Student" id="ChargeResultMap" extends="BaseResultMap">
+		<collection property="charge" ofType="com.school.pojo.Charge">
+			<id property="id" column="id"/>
+			<result property="chargeitem" column="chargeitem"/>
+			<result property="price" column="price"/>
+			<result property="ispay" column="ispay"/>
+		</collection>
+	</resultMap>
 	<sql id="Base_Column_List">
 		sid,sname,ssex,sbirthday
 	</sql>
-	
+	<select id="getChargesBySId" resultMap="ChargeResultMap" parameterType="java.lang.String">
+		select
+			c.chargeitem,c.price,c.ispay
+		from
+		 	charge c
+		inner join
+			student s
+		on 
+			c.studentid=s.sid
+		where s.sid=#{s.sid,jdbcType=VARCHAR}
+	</select>
 	<select id="getStudentsByClass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select c.id,s.sid,s.sname
 		from student s

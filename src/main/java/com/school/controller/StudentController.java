@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.school.pojo.Charge;
 import com.school.pojo.Student;
 import com.school.service.StudentService;
 
@@ -57,7 +58,7 @@ public class StudentController {
 		student.setSname(String.valueOf(request.getParameter("sname")));
 		student.setSsex(String.valueOf(request.getParameter("ssex")));
 		student.setSbirthday(String.valueOf(request.getParameter("sbirthday")));
-		//student.setClassid(Integer.parseInt(request.getParameter("classid")));
+		student.setClassid(Integer.parseInt(request.getParameter("classid")));
 		studentService.updateStu(student);
 		return "redirect:stuList";
 	}
@@ -66,7 +67,9 @@ public class StudentController {
 	public String showStu(HttpServletRequest request,Model model){
 		String id =String.valueOf(request.getParameter("sid"));
 		Student student = studentService.getStudentById(id);
+		List<Charge> cList = studentService.getChargesBySid(id);
 		model.addAttribute("student",student);
+		model.addAttribute("cList",cList);
 		return "stuInfo";
 	}
 	

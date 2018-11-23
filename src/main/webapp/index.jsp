@@ -35,5 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <a>--------------------------------</a><br>
     <a href="cou/addCouUI">添加课程</a><br>
     <a href="cou/couList">课程列表</a><br>
+     <a>--------------------------------</a><br>
+    <a href="charge/addChargeUI">添加收费</a><br>
+    <a href="charge/chargeList">收费目录</a><br>
   </body>
 </html>

@@ -1,5 +1,7 @@
 package com.school.pojo;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 @Alias(value="student")
@@ -10,7 +12,13 @@ public class Student {
 	private String sbirthday;
 	private int classid;
 	private Classes classes;
-	
+	private List<Charge> charge;
+	public List<Charge> getCharge() {
+		return charge;
+	}
+	public void setCharge(List<Charge> charge) {
+		this.charge = charge;
+	}
 	public int getClassid() {
 		return classid;
 	}

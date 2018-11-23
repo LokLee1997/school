@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.school.dao.StudentMapper;
+import com.school.pojo.Charge;
 import com.school.pojo.Student;
 @Transactional
 @Service("stuService")
@@ -58,6 +59,13 @@ public class StudentServiceImpl implements StudentService {
 	public List<Student> getStudentsByClass(int id) {
 		// TODO Auto-generated method stub
 		List<Student> list = studentMapper.getStudentsByClass(id);
+		return list;
+	}
+
+	@Override
+	public List<Charge> getChargesBySid(String sid) {
+		// TODO Auto-generated method stub
+		List<Charge> list = studentMapper.getChargesBySId(sid);
 		return list;
 	}
 
