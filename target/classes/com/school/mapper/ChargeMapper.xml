@@ -39,7 +39,7 @@
 		order by
 			c.ispay,s.sid,s.sname
 	</select>
-	<insert id="addCharge" parameterType="com.school.pojo.Classes">
+	<insert id="addCharge" parameterType="com.school.pojo.Charge">
 		insert into charge
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="chargeitem !=null">chargeitem,</if>
@@ -58,7 +58,7 @@
 		delete from charge
 		where id=#{id,jdbcType=INTEGER}
 	</delete>
-	<update id="updateCharge" parameterType="com.school.pojo.Classes">
+	<update id="updateCharge" parameterType="com.school.pojo.Charge">
 		update charge
 		<set>
 			<if test="chargeitem != null">

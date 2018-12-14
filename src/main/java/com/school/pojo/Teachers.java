@@ -12,18 +12,19 @@ public class Teachers {
 	private String tbirthday;
 	private int depart;
 	private Depart departs;
-	private List<Course> courses;
+	private List<Classes> classes;
+	
+	public List<Classes> getClasses() {
+		return classes;
+	}
+	public void setClasses(List<Classes> classes) {
+		this.classes = classes;
+	}
 	public int getDepart() {
 		return depart;
 	}
 	public void setDepart(int depart) {
 		this.depart = depart;
-	}
-	public List<Course> getCourses() {
-		return courses;
-	}
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
 	}
 	public int getTno() {
 		return tno;

@@ -26,11 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div align="center">
     <form action="cou/addCou" method="post" id="addCou">
     	<label>课程名字：</label><input id="cname" name="cname"/><br>
-    	<select name="tno">
-    		<option>1</option>
-    		<option>2</option>
-    		<option>3</option>
-    	</select>
+    	<label>课程信息：</label><textarea name="detail"></textarea>
     	<input type="submit" value="添加"/>
     	<input type="reset" value="重置"/>
     </form>

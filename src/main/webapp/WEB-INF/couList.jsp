@@ -36,8 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td>${cou.cno}</td>
     		<td><a href="cou/couInfo?cno=${cou.cno}">${cou.cname}</a></td>
     		<td>
-    		 	<a href="cou/updateCouUI?cname=${cou.cno}">更新</a>
-    			<a href="cou/delCou?cname=${cou.cno}">删除</a>
+    		 	<a href="cou/updateCouUI?cno=${cou.cno}">更新</a>
+    			<a href="cou/delCou?cno=${cou.cno}">删除</a>
     		</td>
     	</tr>
     </c:forEach>

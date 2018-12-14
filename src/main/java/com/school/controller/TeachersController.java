@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.school.pojo.Classes;
 import com.school.pojo.Course;
 import com.school.pojo.Teachers;
 import com.school.service.TeachersService;
@@ -73,9 +74,9 @@ public class TeachersController {
 	public String tesInfo(HttpServletRequest request,Model model){
 		int id = Integer.parseInt(request.getParameter("tno"));
 		Teachers teachers = teachersService.gettesById(id);
-		List<Course> courses = teachersService.getCourses(id);
+		List<Classes> classes = teachersService.getClasses(id);
 		model.addAttribute("teacher",teachers);
-		model.addAttribute("courses",courses);
+		model.addAttribute("classes",classes);
 		return "tesInfo";
 	}
 }

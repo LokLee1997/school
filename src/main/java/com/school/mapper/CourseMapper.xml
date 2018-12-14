@@ -6,12 +6,7 @@
 	<resultMap type="com.school.pojo.Course" id="BaseResultMap">
 		<id property="cno" column="cno" javaType="int" jdbcType="INTEGER"/>
 		<result property="cname" column="cname" javaType="string" jdbcType="VARCHAR"/>
-	</resultMap>
-	<resultMap type="com.school.pojo.Course" id="TeacherResultMap" extends="BaseResultMap">
-		<collection property="teachers" ofType="com.school.pojo.Teachers">
-			<id property="tno" column="tno" javaType="int" jdbcType="INTEGER"/>
-			<result property="tname" column="tname" javaType="string" jdbcType="VARCHAR"/>
-		</collection>
+		<result property="detail" column="detail" javaType="string" jdbcType="VARCHAR"/>
 	</resultMap>
 	<resultMap type="com.school.pojo.Course" id="ClassResultMap" extends="BaseResultMap">
 		<collection property="classes" ofType="com.school.pojo.Classes">
@@ -21,41 +16,29 @@
 	</resultMap>
 	
 	<select id="getCourseById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select c.cname from course c where c.cno=#{c.cno,jdbcType=INTEGER}
+		select c.cno,c.cname,c.detail from course c where c.cno=#{c.cno,jdbcType=INTEGER}
 	</select>
-	<select id="getCourseTeachers" resultMap="TeacherResultMap" parameterType="java.lang.Integer">
-		select c.cname,t.tname from
-		course c
-		inner join
-		teacher_course tc
-		on c.cno=tc.course_cno
-		inner join
-		teachers t
-		on tc.teacher_tno=t.tno
-		where c.cno=#{c.cno,jdbcType=INTEGER};
-	</select>
-	
 	<select id="getCourses" resultMap="BaseResultMap">
  		select
- 			cno,cname
+ 			cno,cname,detail
  		from
  			course 
- 		group by cname
 	</select>
 	<insert id="addCourse" parameterType="com.school.pojo.Course">
 		insert into course
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="cname !=null">cname,</if>
-			tno
+			<if test="detail !=null">detail</if>
+			
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="cname !=null">#{cname,jdbcType=VARCHAR},</if>
-			#{tno,jdbcType=INTEGER}
+			<if test="detail !=null">#{detail,jdbcType=VARCHAR}</if>
 		</trim>
 	</insert>
-	<delete id="deleteCourse" parameterType="java.lang.String">
+	<delete id="deleteCourse" parameterType="java.lang.Integer">
 		delete from course
-		where cname=#{cname,jdbcType=VARCHAR}
+		where cno=#{cno,jdbcType=INTEGER}
 	</delete>
 	<update id="updateCourse" parameterType="com.school.pojo.Course">
 		update course
@@ -63,7 +46,10 @@
 			<if test="cname!=null">
 				cname=#{cname,jdbcType=VARCHAR},
 			</if>
+			<if test="detail!=null">
+				detail=#{detail,jdbcType=VARCHAR}
+			</if>
 		</set>
-		where cname= #{cname,jdbcType=VARCHAR}
+		where cno= #{cno,jdbcType=VARCHAR}
 	</update>
 </mapper>

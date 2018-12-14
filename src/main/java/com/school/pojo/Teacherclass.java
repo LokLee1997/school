@@ -4,14 +4,21 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("teacherclass")
 public class Teacherclass {
-	private int id;
+	private int classid;
+	private int teachertno;
 	private Teachers teachers;
 	private Classes classes;
-	public int getId() {
-		return id;
+	public int getClassid() {
+		return classid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setClassid(int classid) {
+		this.classid = classid;
+	}
+	public int getTeachertno() {
+		return teachertno;
+	}
+	public void setTeachertno(int teachertno) {
+		this.teachertno = teachertno;
 	}
 	public Teachers getTeachers() {
 		return teachers;

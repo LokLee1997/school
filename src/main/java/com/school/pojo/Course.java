@@ -8,10 +8,16 @@ import org.apache.ibatis.type.Alias;
 public class Course {
 	private int cno;
 	private String cname;
+	private String detail;
 	private List<Teachers> teachers;
 	private List<Classes> classes;
 	
-	
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 	public List<Classes> getClasses() {
 		return classes;
 	}

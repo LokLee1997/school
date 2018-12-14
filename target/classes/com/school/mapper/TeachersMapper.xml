@@ -13,26 +13,26 @@
  				<result property="dname" column="dname" javaType="string" jdbcType="VARCHAR"/> 
  		</association>
 	</resultMap>
-	<resultMap type="com.school.pojo.Teachers" id="CourseResultMap" extends="BaseResultMap">
-		<collection property="courses" ofType="com.school.pojo.Course">
-			<id property="cno" column="cno"/>
-			<result property="cname" column="cname"/>
+	<resultMap type="com.school.pojo.Teachers" id="ClassesResultMap" extends="BaseResultMap">
+		<collection property="classes" ofType="com.school.pojo.Classes">
+			<id property="id" column="id"/>
+			<result property="classname" column="classname"/>
 		</collection>
 	</resultMap>
 	<!-- 获取教师课程 -->
-	<select id="getTeacherCourses" resultMap="CourseResultMap" parameterType="java.lang.Integer">
+	<select id="getTeacherClasses" resultMap="ClassesResultMap" parameterType="java.lang.Integer">
 		select 
-			t.tname,c.cname
+			t.tname,c.classname
 		from 
-			course c
+			class c
 		inner join 
-			teacher_course tc
+			teacher_class tc
 		on 
-			c.cno =tc.course_cno
+			c.id =tc.classid
 		inner join 
 			teachers t
 		on 
-			tc.teacher_tno=t.tno
+			tc.teachertno=t.tno
 		where 
 			t.tno=#{t.tno,jdbcType=INTEGER}
 	

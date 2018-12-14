@@ -29,16 +29,16 @@ public class CourseController {
 	@RequestMapping("/addCou")
 	public String addCou(HttpServletRequest request,Model model){
 		Course course = new Course();
-		int id = Integer.parseInt(request.getParameter("tno"));
 		course.setCname(String.valueOf(request.getParameter("cname")));
+		course.setDetail(String.valueOf(request.getParameter("detail")));
 		courseService.addCou(course);
 		return "redirect:couList";
 	}
 	
 	@RequestMapping("/delCou")
 	public String delCou(HttpServletRequest request){
-		String cname=String.valueOf(request.getParameter("cname"));
-		courseService.delCou(cname);
+		int id=Integer.parseInt(request.getParameter("cno"));
+		courseService.delCou(id);
 		return "redirect:couList";
 	}
 	
@@ -55,6 +55,7 @@ public class CourseController {
 		int id = Integer.parseInt(request.getParameter("cno"));
 		Course course = courseService.getCourseById(id);
 		course.setCname(String.valueOf(request.getParameter("cname")));
+		course.setDetail(String.valueOf(request.getParameter("detail")));
 		courseService.updateCou(course);
 		return "redirect:couList";
 	}
@@ -70,9 +71,7 @@ public class CourseController {
 	public String couInfo(HttpServletRequest request,Model model){
 		int id = Integer.parseInt(request.getParameter("cno"));
 		Course course = courseService.getCourseById(id);
-		List<Teachers> tList = courseService.getTeachers(id);
 		model.addAttribute("course",course);
-		model.addAttribute("tList",tList);
 		return "couInfo";
 	}
 }

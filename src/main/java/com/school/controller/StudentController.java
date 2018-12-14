@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
 import com.school.pojo.Student;
 import com.school.service.StudentService;
@@ -68,8 +69,10 @@ public class StudentController {
 		String id =String.valueOf(request.getParameter("sid"));
 		Student student = studentService.getStudentById(id);
 		List<Charge> cList = studentService.getChargesBySid(id);
+		List<Attendance> aList = studentService.getAttendancesBySid(id);
 		model.addAttribute("student",student);
 		model.addAttribute("cList",cList);
+		model.addAttribute("aList",aList);
 		return "stuInfo";
 	}
 	

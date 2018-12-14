@@ -29,6 +29,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div>职工性别：${teacher.tsex}</div>
     <div>出生日期：${teacher.tbirthday}</div>
     <div>所属部门：${teacher.departs.dname}</div>
+    <div>
+    	<c:forEach items="${classes}" var="c">
+    	执教班级：
+    	<c:forEach items="${c.classes}" var="cls">
+    		${cls.classname}
+    	</c:forEach>
+    	</c:forEach>
+    </div>
   </div>
   </body>
 </html>

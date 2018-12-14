@@ -40,9 +40,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td><a href="stu/stuInfo?sid=${charge.student.sid}"">${charge.student.sname}</a></td>
     		<td>${charge.chargeitem}</td>
     		<td>${charge.price}</td>
-    		<td>${charge.ispay}</td>
     		<td>
+    				<c:choose>
+    				<c:when test="${charge.ispay=='0'}">
+    					未缴费
+    				</c:when>
+    				<c:otherwise>
+    					已缴费
+    				</c:otherwise>
+    			</c:choose>
+    				
+    		
+    		</td>
+    		<td>
+    		<c:if test="${charge.ispay=='0'}">
     			<a href="charge/updateChargeState?id=${charge.id}">确认缴费</a>
+    		 </c:if>	
     		 	<a href="charge/updateChargeUI?id=${charge.id}">更新</a>
     			<a href="charge/deleteCharge?id=${charge.id}">删除</a>
     		</td>

@@ -25,7 +25,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div align="center" >
     <form id="updateCou" action="cou/updateCou" method="post">
-    	<label>课程名称：</label><input value="${course.cname}" id="cname" name="cname"><br>
+    	<input type="hidden" value="${course.cno}" name="cno" id="cno"/> 
+    	<label>课程名字：</label><input value="${course.cname }" id="cname" name="cname"/><br>
+    	<label>课程信息：</label><textarea name="detail">${course.detail}</textarea>
     	<input type="submit" value="修改">
     	<input type="reset" value="重置">
     </form>

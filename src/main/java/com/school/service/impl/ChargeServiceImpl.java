@@ -1,4 +1,4 @@
-package com.school.service;
+package com.school.service.impl;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.school.dao.ChargeMapper;
 import com.school.pojo.Charge;
+import com.school.service.ChargeService;
 @Transactional
 @Service("chargeService")
 public class ChargeServiceImpl implements ChargeService {

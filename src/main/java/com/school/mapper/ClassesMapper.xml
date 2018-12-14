@@ -33,7 +33,7 @@
 	<!-- 获取班级的教师 -->
 	<select id="getClassTeachers" resultMap="TeacherResultMap" parameterType="java.lang.Integer">
 		SELECT
-			c.classname,t.tname
+			c.classname,t.tname,t.tno
 		FROM 
 			teachers t
 		INNER JOIN 
@@ -81,7 +81,7 @@
 		where c.id=#{c.id,jdbcType=INTEGER}		
 	</select>
 	<select id="getclassesCourses" resultMap="CourseResultMap" parameterType="java.lang.Integer">
-		select c.cname
+		select c.cname,c.cno
 		from course c
 		inner join class_course cc
 		on c.cno=cc.courseno

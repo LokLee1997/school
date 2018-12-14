@@ -2,6 +2,7 @@ package com.school.dao;
 
 import java.util.List;
 
+import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
 import com.school.pojo.Student;
 
@@ -13,4 +14,5 @@ public interface StudentMapper {
 	public List<Student> getStudentList();
 	public List<Student> getStudentsByClass(int id);
 	public List<Charge> getChargesBySId(String sid);
+	public List<Attendance> getAttendancesBySid(String sid);
 }

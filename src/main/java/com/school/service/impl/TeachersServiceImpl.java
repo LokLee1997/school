@@ -1,4 +1,4 @@
-package com.school.service;
+package com.school.service.impl;
 
 import java.util.List;
 
@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.school.dao.TeachersMapper;
+import com.school.pojo.Classes;
 import com.school.pojo.Course;
 import com.school.pojo.Teachers;
+import com.school.service.TeachersService;
 @Transactional
 @Service("tesService")
 public class TeachersServiceImpl implements TeachersService {
@@ -45,10 +47,11 @@ public class TeachersServiceImpl implements TeachersService {
 		List<Teachers> list = teachersMapper.getTeachersList();
 		return list;
 	}
+
 	@Override
-	public List<Course> getCourses(int id) {
+	public List<Classes> getClasses(int id) {
 		// TODO Auto-generated method stub
-		List<Course> list = teachersMapper.getTeacherCourses(id);
+		List<Classes> list = teachersMapper.getTeacherClasses(id);
 		return list;
 	}
 }

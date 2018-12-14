@@ -22,9 +22,21 @@
 			<result property="ispay" column="ispay"/>
 		</collection>
 	</resultMap>
-	<sql id="Base_Column_List">
-		sid,sname,ssex,sbirthday
-	</sql>
+	<resultMap type="com.school.pojo.Student" id="AttendanceResultMap" extends="BaseResultMap">
+		<collection property="attendances" ofType="com.school.pojo.Attendance">
+			<id property="id" column="id"/>
+			<result property="date" column="date"/>
+			<result property="state" column="state"/>
+		</collection>
+	</resultMap>
+	<select id="getAttendancesBySid" resultMap="AttendanceResultMap" parameterType="java.lang.String">
+		SELECT
+			a.id,a.date,a.state
+		FROM attendance a
+		INNER JOIN student s
+		ON a.studentid = s.sid
+		WHERE s.sid=#{s.sid,jdbcType=VARCHAR}
+	</select>
 	<select id="getChargesBySId" resultMap="ChargeResultMap" parameterType="java.lang.String">
 		select
 			c.chargeitem,c.price,c.ispay

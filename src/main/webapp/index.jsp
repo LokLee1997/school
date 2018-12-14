@@ -38,5 +38,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <a>--------------------------------</a><br>
     <a href="charge/addChargeUI">添加收费</a><br>
     <a href="charge/chargeList">收费目录</a><br>
+    <a>--------------------------------</a><br>
+    <a href="att/attList">缺勤信息</a><br>
+     <a>--------------------------------</a><br>
+    <a href="lunch/addLunchUI">添加午餐菜单</a><br>
+    <a href="lunch/lunchList">午餐菜单目录</a><br>
   </body>
 </html>

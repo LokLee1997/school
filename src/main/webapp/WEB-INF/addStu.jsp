@@ -29,7 +29,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<label>姓名：</label><input id="sname" name="sname"/><br>
     	<label>性别：</label><input id="ssex" name="ssex"/><br>
     	<label>出生日期：</label><input id="sbirthday" name="sbirthday"/><br>
-    	<label>班级：</label><input id="classid" name="classid"/><br>
+    	<label>班级：</label>
+    	<select name="classid">
+    		<option value="1">小班一班</option>
+    		<option value="2">小班二班</option>
+    		<option value="3">中班一班</option>
+    		<option value="4">中班二班</option>
+    	</select>
     	<input type="submit" value="添加"/>
     	<input type="reset" value="重置"/>
     </form></div>

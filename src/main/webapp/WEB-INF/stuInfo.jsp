@@ -30,13 +30,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div><label>学生性别:</label>${student.ssex}</div>
     <div><label>出生日期:</label>${student.sbirthday}</div>
     <div><label>学生班级:</label>${student.classes.classname}</div>
-    <div>需缴纳费用:
+    <div>
     	<c:forEach items="${cList}" var="c">
+    	需缴纳费用:
     		<c:forEach items="${c.charge}" var="ch">
     			缴费项目:${ch.chargeitem}<br>
     			缴费金额:${ch.price }<br>
-    			缴费状态:${ch.ispay }<br>
+    			缴费状态:
+    			<c:choose>
+    				<c:when test="${ch.ispay=='0'}">
+    					未缴费
+    				</c:when>
+    				<c:otherwise>
+    					已缴费
+    				</c:otherwise>
+    			</c:choose>
     		</c:forEach>
+    	</c:forEach>
+    </div>
+    <div>
+    	<c:forEach items="${aList}" var="a">
+    	缺勤记录：<br>
+    	<c:forEach items="${a.attendances}" var="att">
+    		<c:choose>
+    				<c:when test="${att.state=='0'}">无故缺席</c:when>
+    				<c:otherwise>请病假</c:otherwise>
+    			</c:choose>
+    			${att.date}
+    	</c:forEach>
     	</c:forEach>
     </div>
    </div>

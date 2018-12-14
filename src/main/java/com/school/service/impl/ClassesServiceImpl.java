@@ -1,4 +1,4 @@
-package com.school.service;
+package com.school.service.impl;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import com.school.pojo.Classes;
 import com.school.pojo.Course;
 import com.school.pojo.Student;
 import com.school.pojo.Teachers;
+import com.school.service.ClassesService;
 @Transactional
 @Service("clsService")
 public class ClassesServiceImpl implements ClassesService {

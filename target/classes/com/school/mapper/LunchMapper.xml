@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.dao.LunchMapper">
+	<resultMap type="com.school.pojo.Lunch" id="BaseResultMap">
+		<id property="id" column="id" javaType="int" jdbcType="INTEGER"/>
+		<result property="date" column="date" javaType="string" jdbcType="VARCHAR"/>
+		<result property="caipin" column="caipin" javaType="string" jdbcType="VARCHAR"/>
+		<association property="cooker" javaType="com.school.pojo.Teachers">
+			<id property="tno" column="tno"/>
+			<result property="tname" column="tname"/>
+		</association>
+	</resultMap>
+	<select id="getLunchById" resultMap="BaseResultMap">
+		SELECT l.id,l.caipin,l.date,t.tname
+		FROM lunch l
+		INNER JOIN teachers t
+		on l.cooker=t.tno
+		WHERE l.id= #{l.id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getLunchs" resultMap="BaseResultMap">
+		SELECT l.id,l.caipin,l.date,t.tname
+		FROM lunch l
+		INNER JOIN teachers t
+		on l.cooker=t.tno
+	</select>
+	<insert id="addLunch" parameterType="com.school.pojo.Lunch">
+		insert into lunch
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="date !=null">date,</if>
+			<if test="caipin !=null">caipin,</if>
+			<if test="cookerid !=null">cooker</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="date !=null">#{date,jdbcType=VARCHAR},</if>
+			<if test="caipin !=null">#{caipin,jdbcType=VARCHAR},</if>
+			<if test="cookerid !=null">#{cookerid,jdbcType=INTEGER}</if>
+		</trim>
+	</insert>
+	<delete id="delLunch" parameterType="java.lang.Integer">
+		delete from lunch
+		where id=#{id,jdbcType=INTEGER}
+	</delete>
+	<update id="updateLunch" parameterType="com.school.pojo.Lunch">
+		update lunch
+		<set>
+			<if test="date != null">
+				date=#{date,jdbcType=VARCHAR},
+			</if>
+			<if test="caipin != null">
+				caipin=#{caipin,jdbcType=VARCHAR},
+			</if>
+			<if test="cookerid != null">
+				cooker=#{cookerid,jdbcType=INTEGER}
+			</if>
+		</set>
+		where id= #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,4 +1,4 @@
-package com.school.service;
+package com.school.service.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.school.dao.DepartMapper;
 import com.school.pojo.Depart;
 import com.school.pojo.Teachers;
+import com.school.service.DepartService;
 @Transactional
 @Service("depService")
 public class DepartServiceImpl implements DepartService {

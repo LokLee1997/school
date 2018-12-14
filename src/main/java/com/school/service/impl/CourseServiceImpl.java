@@ -1,4 +1,4 @@
-package com.school.service;
+package com.school.service.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.school.dao.CourseMapper;
 import com.school.pojo.Course;
 import com.school.pojo.Teachers;
+import com.school.service.CourseService;
 @Transactional
 @Service("couService")
 public class CourseServiceImpl implements CourseService {
@@ -28,17 +29,12 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void delCou(String cname) {
+	public void delCou(int id) {
 		// TODO Auto-generated method stub
-		courseMapper.deleteCourse(cname);
+		courseMapper.deleteCourse(id);
 	}
 
-	@Override
-	public List<Course> getCourseByCname(String cname) {
-		// TODO Auto-generated method stub
-		List<Course> list = courseMapper.getCourseByCname(cname);
-		return list;
-	}
+	
 
 	@Override
 	public List<Course> getCourses() {
@@ -53,11 +49,8 @@ public class CourseServiceImpl implements CourseService {
 		return courseMapper.getCourseById(id);
 	}
 
-	@Override
-	public List<Teachers> getTeachers(int id) {
-		// TODO Auto-generated method stub
-		List<Teachers> list = courseMapper.getCourseTeachers(id);
-		return list;
-	}
+
+
+	
 
 }

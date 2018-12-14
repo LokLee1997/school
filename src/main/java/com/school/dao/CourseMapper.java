@@ -7,10 +7,8 @@ import com.school.pojo.Teachers;
 
 public interface CourseMapper {
 	public void addCourse(Course course);
-	public void deleteCourse(String cname);
+	public void deleteCourse(int id);
 	public void updateCourse(Course course);
-	public List<Course> getCourseByCname(String cname);
 	public List<Course> getCourses();
 	public Course getCourseById(int id);
-	public List<Teachers> getCourseTeachers(int id);
 }

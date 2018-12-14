@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<label>班级名称:</label>
     </div>
     ${classes.classname}
-    
+   
     <div><label>班级人数:</label>${num}</div>
     <div>
     <div><label>班级学生名单:</label></div>
@@ -39,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			 <c:forEach var="student" items="${stu.student}">
     			 	${student.sid}
     				${student.sname}
+    				<a href="att/addAttUI?id=${student.sid}">添加到缺勤</a>
     				<br>
     			</c:forEach>
     		</c:forEach>
@@ -47,15 +48,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div>班级课程:</div>
     	<c:forEach items="${cList}" var="cou">
     			 <c:forEach var="course" items="${cou.course}">
-    			 	${course.cname}
+    			 	<div>${course.cname}
+    			 	<a href="cls/delClsCou?classid=${classes.id}&courseno=${course.cno}">删除</a>
+    			 	</div>
     			</c:forEach>
     		</c:forEach>
+    		<div><a href="cls/addClsCouUI?id=${classes.id}">添加课程</a></div>
     	<div>班级教师：</div>
     	<c:forEach items="${tList}" var="tes">
     			 <c:forEach var="tes" items="${tes.teachers}">
+    			 	<div>
     			 	${tes.tname}
+    			 	<a href="cls/delClsTes?classid=${classes.id}&teachertno=${tes.tno}">删除</a>
+    				</div>
     			</c:forEach>
     		</c:forEach>
+    		<div><a href="cls/addClsTesUI?id=${classes.id}">添加教师</a></div>
     	</div>
     </div>
     </div>

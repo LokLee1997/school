@@ -1,4 +1,4 @@
-package com.school.service;
+package com.school.service.impl;
 
 import java.util.List;
 
@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.school.dao.StudentMapper;
+import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
 import com.school.pojo.Student;
+import com.school.service.StudentService;
 @Transactional
 @Service("stuService")
 public class StudentServiceImpl implements StudentService {
@@ -66,6 +68,13 @@ public class StudentServiceImpl implements StudentService {
 	public List<Charge> getChargesBySid(String sid) {
 		// TODO Auto-generated method stub
 		List<Charge> list = studentMapper.getChargesBySId(sid);
+		return list;
+	}
+
+	@Override
+	public List<Attendance> getAttendancesBySid(String sid) {
+		// TODO Auto-generated method stub
+		List<Attendance> list =studentMapper.getAttendancesBySid(sid);
 		return list;
 	}
 

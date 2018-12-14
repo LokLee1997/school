@@ -2,6 +2,7 @@ package com.school.service;
 
 import java.util.List;
 
+import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
 import com.school.pojo.Student;
 
@@ -14,4 +15,5 @@ public interface StudentService {
 	public int getStuNum();
 	public List<Student> getStudentsByClass(int id);
 	public List<Charge> getChargesBySid(String sid);
+	public List<Attendance> getAttendancesBySid(String sid);
 }
