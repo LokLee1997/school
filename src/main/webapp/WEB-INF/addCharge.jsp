@@ -19,25 +19,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <div align="center">
-    <form action="charge/addCharge" method="post" id="addCharge">
-    	<label>收费项目：</label><input id="chargeitem" name="chargeitem"/><br>
-    	<label>需缴价格：</label><input id="price" name="price" type="text" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" >
-    	<br>
-    	<label>需交费学生：</label><select name="studentid">
-    		<option value="2019001">王丽</option>
-    		<option value="2019002">罗拉</option>
-    		<option value="2019003">罗兰</option>
-    		<option value="2019004">李丽</option>
-    		<option value="2019005">罗什</option>
-    	</select>
-    	<input type="submit" value="添加"/>
-    	<input type="reset" value="重置"/>
-    </form>
-    </div>
+   
+    <div class="container">
+  <div class="row row-centered"> 
+  	<div class="col-md-6 col-md-offset-3 col-centered">
+    <form class="form-horizontal" method="post" action="charge/addCharge" name="addCharge" id="addCharge">
+  		<div class="form-group">
+    			<label for="lunchName" class="control-label col-md-3">收费项目：</label>
+                <div class="col-md-6"> 
+                	<input class="form-control" type="text" name="chargeitem" id="chargeitem" /><span id="idSpan"></span>		                
+                </div>
+    	</div>
+    	 <div class="form-group">
+        		<label for="dateLabel" class="control-label col-md-3">需缴价格：</label>
+                <div class="col-md-6">
+        			<input class="form-control" type="text" name="price" id="price" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" />				        		
+                </div>
+        </div>
+    	<div class="form-group">
+        		<label for="studentname" class="control-label col-md-3">需交费学生：</label>
+                <div class="col-md-6">
+        			<select name="studentid" class="form-control">
+    					<option value="2019001">2019001-王丽</option>
+    					<option value="2019002">2019002-罗拉</option>
+    					<option value="2019003">2019003-罗兰</option>
+    					<option value="2019004">2019004-李丽</option>
+    					<option value="2019005">2019005-罗什</option>
+    				</select>			        		
+                </div>
+        </div>
+       
+        <div class="form-group">
+        <div class="col-md-offset-4">
+    			<input class="btn btn-info" type="submit" value="添加"/>
+    			<input class="btn btn-info" type="reset" value="重置"/>
+    	</div>
+        </div>
+        </form>
+  </div>
+  </div>
+  </div>
   </body>
 </html>

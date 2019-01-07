@@ -19,22 +19,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-   <div align="center">
-    <form action="lunch/addLunch" method="post" id="addLunch">
-    	<label>菜式：</label><input id="caipin" name="caipin"/><br>
-    	<label>厨师：</label>
-    		<select name="cookerid">
+   
+    <div class="container">
+  <div class="row row-centered"> 
+  	<div class="col-md-6 col-md-offset-3 col-centered">
+    <form class="form-horizontal" method="post" action="lunch/addLunch" name="addLunch" id="addLunch">
+  		<div class="form-group">
+    			<label for="lunchName" class="control-label col-md-3">菜式：</label>
+                <div class="col-md-6"> 
+                	<input class="form-control" type="text" name="caipin" id="caipin" /><span id="idSpan"></span>		                
+                </div>
+    	</div>
+    	<div class="form-group">
+        		<label for="studentname" class="control-label col-md-3">厨师：</label>
+                <div class="col-md-6">
+        			<select name="cookerid" class="form-control">
     			<option value="2">张旭</option> 
-    		</select>
-    		<br>
-    	<label>日期：</label><input id="date" name="date"><br>
-    	<input type="submit" value="添加"/>
-    	<input type="reset" value="重置"/>
-    </form>
-    </div>
+    		</select>			        		
+                </div>
+        </div>
+        <div class="form-group">
+        		<label for="dateLabel" class="control-label col-md-3">日期：</label>
+                <div class="col-md-6">
+        			<input class="form-control" type="text" name="date" id="date"/>				        		
+                </div>
+        </div>
+        <div class="form-group">
+        <div class="col-md-offset-4">
+    			<input class="btn btn-info" type="submit" value="添加"/>
+    			<input class="btn btn-info" type="reset" value="重置"/>
+    	</div>
+        </div>
+        </form>
+  </div>
+  </div>
+  </div>
   </body>
 </html>

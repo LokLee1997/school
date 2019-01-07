@@ -20,53 +20,107 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-   <div align="center" >
-    <div>
-    <div>
-    	<label>班级名称:</label>
-    </div>
+
+  <div class="container">
+	<div class="row clearfix">
+	<div class="col-md-8 col-md-offset-2 ">
+	<h2><label>班级名称:</label>
     ${classes.classname}
-   
     <div><label>班级人数:</label>${num}</div>
-    <div>
-    <div><label>班级学生名单:</label></div>
-    <div>
-    		<c:forEach items="${sList}" var="stu">
+    </h2>
+	</div>
+		<div class="col-md-8 col-md-offset-2 column">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th colspan="2">班级学生名单:</th>
+						<th style="text-align: right"><a href="#">添加学生</a></th>
+					</tr>
+					<tr style="width: 33%">
+						<th>学生学号</th>
+    					<th>学生名字</th>
+    					<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${sList}" var="stu">
     			 <c:forEach var="student" items="${stu.student}">
-    			 	${student.sid}
-    				${student.sname}
-    				<a href="att/addAttUI?id=${student.sid}">添加到缺勤</a>
-    				<br>
+    			 	<tr>
+    			 	<td>${student.sid}</td>
+    				<td>${student.sname}</td>
+    				<td>
+    					<a href="att/addAttUI?id=${student.sid}">添加到缺勤</a>
+    					<a href="cls/delClsStu?sid=${student.sid}">从班级中删除</a>
+    				</td>
+    				</tr>
     			</c:forEach>
     		</c:forEach>
-    	</div>
-    	<div>
-    	<div>班级课程:</div>
-    	<c:forEach items="${cList}" var="cou">
-    			 <c:forEach var="course" items="${cou.course}">
-    			 	<div>${course.cname}
-    			 	<a href="cls/delClsCou?classid=${classes.id}&courseno=${course.cno}">删除</a>
-    			 	</div>
+				</tbody>
+			</table>
+		</div>
+	
+		<div class="col-md-8 col-md-offset-2 column">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>班级课程:</th>
+						<th style="text-align: right"><a href="cls/addClsCouUI?id=${classes.id}">添加课程</a></th>
+					</tr>
+					<tr >
+						<th style="width:63%">课程名称</th>
+    					<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${cList}" var="cou">
+    			 		<c:forEach var="course" items="${cou.course}">
+    			 			<tr>
+    			 			<td>${course.cname}</td>
+    			 			<td><a href="cls/delClsCou?classid=${classes.id}&courseno=${course.cno}">删除</a></td>
+    			            </tr>
     			</c:forEach>
     		</c:forEach>
-    		<div><a href="cls/addClsCouUI?id=${classes.id}">添加课程</a></div>
-    	<div>班级教师：</div>
-    	<c:forEach items="${tList}" var="tes">
+				</tbody>
+			</table>
+		</div>
+
+   
+		<div class="col-md-8 col-md-offset-2 column">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>班级教师:</th>
+						<th colspan="2" style="text-align: right"><a href="cls/addClsTesUI?id=${classes.id}">添加教师</a></th>
+					</tr>
+					<tr style="width: 33%">
+						<th>教师编号</th>
+						<th>教师姓名</th>
+    					<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${tList}" var="tes">
     			 <c:forEach var="tes" items="${tes.teachers}">
-    			 	<div>
-    			 	${tes.tname}
-    			 	<a href="cls/delClsTes?classid=${classes.id}&teachertno=${tes.tno}">删除</a>
-    				</div>
+    			 	<tr>
+    			 	<td>${tes.tno}</td>
+    			 	<td>${tes.tname}</td>
+    			 	<td><a href="cls/delClsTes?classid=${classes.id}&teachertno=${tes.tno}">删除</a></td>
+    				</tr>
     			</c:forEach>
     		</c:forEach>
-    		<div><a href="cls/addClsTesUI?id=${classes.id}">添加教师</a></div>
-    	</div>
-    </div>
-    </div>
-    </div>
+  
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+ 
   </body>
 </html>

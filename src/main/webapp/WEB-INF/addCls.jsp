@@ -19,16 +19,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <div align="center">
-    <form action="cls/addCls" method="post" id="addCls">
-    	<label>班级名字：</label><input id="classname" name="classname"/><br>
-    	<input type="submit" value="添加"/>
-    	<input type="reset" value="重置"/>
-    </form>
-    </div>
+    
+    <div class="container">
+  <div class="row row-centered"> 
+  	<div class="col-md-6 col-md-offset-3 col-centered">
+    <h2>添加班级</h2>
+    <form class="form-horizontal" method="post" action="cls/addCls" name="addCls" id="addCls">
+  		<div class="form-group">
+    			<label for="classname" class="control-label col-md-3">班级名字：</label>
+                <div class="col-md-6"> 
+                	<input class="form-control" type="text" name="classname" id="classname" /><span id="idSpan"></span>		                
+                </div>
+    	</div>
+        <div class="form-group">
+        <div class="col-md-offset-4">
+    			<input class="btn btn-info" type="submit" value="添加"/>
+    			<input class="btn btn-info" type="reset" value="重置"/>
+    	</div>
+        </div>
+        </form>
+  </div>
+  </div>
+  </div>
   </body>
 </html>

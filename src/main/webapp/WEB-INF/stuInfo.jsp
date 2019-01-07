@@ -20,23 +20,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-  <div align="center" >
-  	<div><label>学生学号:</label>${student.sid}</div>
-    <div><label>学生姓名:</label>${student.sname}</div>
-    <div><label>学生性别:</label>${student.ssex}</div>
-    <div><label>出生日期:</label>${student.sbirthday}</div>
-    <div><label>学生班级:</label>${student.classes.classname}</div>
-    <div>
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-8 col-md-offset-2 column">
+		<div style="text-align: right"><a href="stu/updateStuUI?sid=${student.sid}"><input type="button" class="btn btn-default" value="更新学生信息"></a></div>
+		<h4>
+		<div><label>学生学号:${student.sid}</label></div>
+    	<div><label>学生姓名:${student.sname}</label></div>
+    	<div><label>学生性别:${student.ssex}</label></div>
+    	<div><label>出生日期:${student.sbirthday}</label></div>
+    	<div><label>学生班级:${student.classes.classname}</label></div>
+    	</h4>
     	<c:forEach items="${cList}" var="c">
-    	需缴纳费用:
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>费用:</th>
+					</tr>
+					<tr>
+						<th>缴费项目</th>
+    					<th>需缴纳金额</th>
+    					<th>是否缴纳</th>
+    					
+					</tr>
+				</thead>
+				<tbody>
     		<c:forEach items="${c.charge}" var="ch">
-    			缴费项目:${ch.chargeitem}<br>
-    			缴费金额:${ch.price }<br>
-    			缴费状态:
+    			<tr>
+    			<td>${ch.chargeitem}</td>
+    			<td>${ch.price }</td>
+    			<td>
     			<c:choose>
     				<c:when test="${ch.ispay=='0'}">
     					未缴费
@@ -45,21 +65,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					已缴费
     				</c:otherwise>
     			</c:choose>
+    			</td>
+    		
     		</c:forEach>
-    	</c:forEach>
-    </div>
-    <div>
-    	<c:forEach items="${aList}" var="a">
-    	缺勤记录：<br>
-    	<c:forEach items="${a.attendances}" var="att">
-    		<c:choose>
+    		</tr>
+				</tbody>
+		</c:forEach>
+			</table>
+		</div>
+	
+		<div class="col-md-8 col-md-offset-2 column">
+			<table class="table table-hover">
+				<c:forEach items="${aList}" var="a">
+				<thead>
+					<tr>
+						<th>缺勤记录</th>
+					</tr>
+					<tr>
+						<th>缺勤原因</th>
+    					<th>日期</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${a.attendances}" var="att">
+					<tr>
+					<td>
+    				<c:choose>
     				<c:when test="${att.state=='0'}">无故缺席</c:when>
     				<c:otherwise>请病假</c:otherwise>
-    			</c:choose>
-    			${att.date}
-    	</c:forEach>
-    	</c:forEach>
-    </div>
-   </div>
+    				</c:choose>
+    				</td>
+    				<td>
+    				${att.date}
+    				</td>
+    				</tr>
+    			</c:forEach>
+				</tbody>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
+</div>
+ 
   </body>
 </html>

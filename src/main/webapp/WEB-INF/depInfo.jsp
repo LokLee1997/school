@@ -20,17 +20,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-  <div align="center" >
-   <div><label>部门名称:</label>${depart.dname}</div>
-   <div><label>部门人数:</label>${num}</div>
-   <div><label>部门人员:</label><br>
-   <table style="text-align: center;">
-   <tr><th>职工编号</th><th>职工姓名</th></tr>
-   		<c:forEach items="${tList}" var="t">
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-8 col-md-offset-2 column">
+		<h2>
+		<div><label>部门名称:${depart.dname}</label></div>
+   		<div><label>部门人数:${num}</label></div>
+   		</h2>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>部门人员:</th>
+					</tr>
+					<tr>
+						<th>职工编号</th>
+    					<th>职工姓名</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${tList}" var="t">
    			<c:forEach items="${t.teachers}" var="teacher">
    				<tr>
    				<td>${teacher.tno}</td>
@@ -38,8 +53,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				</tr>
    			</c:forEach>
    		</c:forEach>
-   </table>
-   </div>
-   </div>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+ 
   </body>
 </html>

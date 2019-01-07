@@ -57,7 +57,9 @@
 	<select id="getClassesList" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List"/>
-		from class order by id 
+		from class 
+		where id != 0
+		order by classname
 	</select>
 	<select id="countClassesStudent" resultType="Integer" parameterType="java.lang.Integer">
 		select

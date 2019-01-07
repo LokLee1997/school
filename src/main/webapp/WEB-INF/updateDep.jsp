@@ -19,17 +19,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-  <div align="center" >
-    <form id="updateDep" action="dep/updateDep" method="post">
-    	<input value="${depart.did}"  type="hidden" id="did" name="did">
-    	<label>姓名：</label><input value="${depart.dname}" id="dname" name="dname"><br>
-    	<input type="submit" value="修改">
-    	<input type="reset" value="重置">
-    </form>
-    </div>
+    <div class="container">
+  <div class="row row-centered"> 
+  	<div class="col-md-6 col-md-offset-3 col-centered">
+    <form class="form-horizontal" method="post" action="dep/updateDep" name="updateDep" id="updateDep">
+  		<h2>更新部门信息</h2>
+  		<input value="${depart.did}"  type="hidden" id="did" name="did">
+  		<div class="form-group">
+    			<label for="studentName" class="control-label col-md-3">部门名称：</label>
+                <div class="col-md-6"> 
+                	<input class="form-control" type="text" value="${depart.dname}" id="dname" name="dname"/>      
+                </div>
+                
+    	</div>
+        <div class="form-group">
+        <div class="col-md-offset-4">
+    			<input class="btn btn-info" type="submit" value="更新"/>
+    			<input class="btn btn-info" type="reset" value="重置"/>
+    	</div>
+        </div>
+        </form>
+  </div>
+  </div>
+  </div>
   </body>
 </html>

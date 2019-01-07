@@ -19,32 +19,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-  <div align="center" >
-    <form id="updateCharge" action="charge/updateCharge" method="post">
-    	<input value="${charge.id}"  type="hidden" id="id" name="id">
-    	<label>学生姓名：</label><select name="studentid">
-    		<option value="2019001">王丽</option>
-    		<option value="2019002">罗拉</option>
-    		<option value="2019003">罗兰</option>
-    		<option value="2019004">李丽</option>
-    		<option value="2019005">罗什</option>
-    	</select><br>
-    	<label>缴费项目：</label><input id="chargeitem" name="chargeitem" value="${charge.chargeitem}"><br>
-    	<label>需缴金额：</label><input id="price" name="price" value="${charge.price }" type="text" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" >
-    	<br>
-    	<label>缴费状态：</label>
-    	<select name="ispay">
-    		<option value="0">未缴费</option>
-    		<option value="1">已缴费</option> 
-    	</select>
-    	<br>
-    	<input type="submit" value="修改">
-    	<input type="reset" value="重置">
-    </form>
-   </div>
+    <div class="container">
+  <div class="row row-centered"> 
+  	<div class="col-md-6 col-md-offset-3 col-centered">
+    <form class="form-horizontal" method="post" action="charge/updateCharge" name="addCharge" id="addCharge">
+  		<h2>更新收费信息</h2>
+  		<input value="${charge.id}"  type="hidden" id="id" name="id">
+    	<input value="${charge.student.sid}" type="hidden" id="studentid" name="studentid">
+  		<div class="form-group">
+    			<label for="studentName" class="control-label col-md-3">学生姓名：</label>
+                <div class="col-md-6"> 
+                <label fro="studentNameLabel" class="control-label">${charge.student.sname}</label>         
+                </div>
+                
+    	</div>
+    	 <div class="form-group">
+        		<label for="itemLabel" class="control-label col-md-3">缴费项目：</label>
+                <div class="col-md-6">
+        			<input class="form-control" type="text" name="chargeitem" id="chargeitem" value="${charge.chargeitem}"/>				        		
+                </div>
+        </div>
+    	<div class="form-group">
+        		<label for="priceLabel" class="control-label col-md-3">缴费金额：</label>
+                <div class="col-md-6">
+        			<input class="form-control" type="text" id="price" name="price" value="${charge.price }"/>				        			        		
+                </div>
+        </div>
+       	<div class="form-group">
+        		<label for="stateLabel" class="control-label col-md-3">缴费状态：</label>
+                <div class="col-md-6">
+        			<select name="ispay" class="form-control">
+    					<option value="0">未缴费</option>
+    					<option value="1">已缴费</option> 
+    				</select>		        		
+                </div>
+        </div>
+        <div class="form-group">
+        <div class="col-md-offset-4">
+    			<input class="btn btn-info" type="submit" value="更新"/>
+    			<input class="btn btn-info" type="reset" value="重置"/>
+    	</div>
+        </div>
+        </form>
+  </div>
+  </div>
+  </div>
   </body>
 </html>

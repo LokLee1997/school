@@ -20,18 +20,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <table style="text-align: center;width: 50%;" align="center">
-    	<tr>
-    		<th>部门编号</th>
+   
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-8 col-md-offset-2 column">
+		<h2>部门表</h2>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>部门编号</th>
     		<th>部门名称</th>
     		<th>操作</th>
-    	</tr>
-    	
-    <c:forEach items="${list}" var="dep">
+					</tr>
+				</thead>
+				<tbody>
+			<c:forEach items="${list}" var="dep">
     	<tr>
     		<td>${dep.did}</td>
     		<td><a href="dep/depInfo?did=${dep.did}">${dep.dname}</a></td>
@@ -41,6 +51,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</td>
     	</tr>
     </c:forEach>
-    </table>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
   </body>
 </html>

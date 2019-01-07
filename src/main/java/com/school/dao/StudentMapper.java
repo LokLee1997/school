@@ -10,6 +10,7 @@ public interface StudentMapper {
 	public void addStudent(Student student);
 	public void deleteStudent(String sid);
 	public void updateStudent(Student student);
+	public void setStudentClass(Student student);
 	public Student getStudentById(String sid);
 	public List<Student> getStudentList();
 	public List<Student> getStudentsByClass(int id);

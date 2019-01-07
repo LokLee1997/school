@@ -19,24 +19,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <div align="center">
-    <form action="att/addAtt" method="post" id="addAtt">
-    	<label>学号：</label><input value="${student.sid}" name="studentid" readonly="readonly" style="border: 0px;"><br>
-    	<label>姓名：</label>${student.sname}
-    	<br>
-    	<label>班级:</label>${student.classes.classname}<br>
-    	<label>缺勤原因：</label><select name="state">
-    		<option value="0">无故缺勤</option>
-    		<option value="1">请病假</option>
-    	</select><br>
-    	日期：<input name="date"><br>
-    	<input type="submit" value="添加"/>
-    	<input type="reset" value="重置"/>
-    </form>
-    </div>
+  
+    <div class="container">
+	<div class="row row-centered">
+		<div class="col-md-8 col-md-offset-2 col-centered">
+			<form role="form-horizontal" action="att/addAtt" method="post" id="addAtt">
+				<input value="${student.sid}" name="studentid" type="hidden">
+				<div class="form-group">
+					 <label for="studentid" class="col-md-2 control-label" style="text-align: right;">学号：</label>
+					 <label for="studentidlabel" class="control-label">
+					 ${student.sid}
+					 </label>
+				</div>
+				<div class="form-group ">
+					 <label for="studentname" class="col-md-2 control-label" style="text-align: right;">姓名：</label>
+					 <label for="studentnamelabel" class="control-label">
+					 ${student.sname}
+					 </label>
+				</div>
+				<div class="form-group">
+					 <label for="class" class="col-md-2 control-label" style="text-align: right;">班级：</label>
+					 <label for="classnamelabel" class="control-label">
+					 ${student.classes.classname}
+					 </label>
+				</div>
+				<div class="form-group">
+					 <label for="studentname" class="col-md-2 control-label" style="text-align: right;">缺勤原因：</label>
+					 
+					 <select name="state">
+    					<option value="0">无故缺勤</option>
+    					<option value="1">请病假</option>
+    				 </select>
+    				 
+				</div>
+				<div class="form-group">
+					 <label for="date" class="col-md-2 control-label" style="text-align: right;">日期：</label>
+					 <div class="col-md-4 input-group input-group-sm">
+					 	<input name="date" type="text" class="form-control"/>
+					 </div>
+				</div>
+				
+				<div class="from-group ">
+					<div class=" col-md-offset-2 col-md-6">
+					<button type="submit" class="btn btn-default">添加</button>
+					<button type="submit" class="btn btn-default">重置</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
   </body>
 </html>

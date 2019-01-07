@@ -22,7 +22,7 @@
 	<!-- 获取教师课程 -->
 	<select id="getTeacherClasses" resultMap="ClassesResultMap" parameterType="java.lang.Integer">
 		select 
-			t.tname,c.classname
+			t.tname,c.id,c.classname
 		from 
 			class c
 		inner join 

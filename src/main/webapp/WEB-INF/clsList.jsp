@@ -20,27 +20,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <table style="text-align: center;width: 50%" align="center">
-    	<tr>
-    		<th>班级编号</th>
-    		<th>班级名</th>
-    		<th>操作</th>
-    	</tr>
-    	
-    <c:forEach items="${list}" var="cls">
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-8 col-md-offset-2 column">
+		<h2>班级表</h2>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>
+							编号
+						</th>
+						<th>
+							班级
+						</th>
+						<th>
+							操作
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${list}" var="cls">
     	<tr>
     		<td>${cls.id}</td>
     		<td><a href="cls/clsInfo?id=${cls.id}">${cls.classname}</a></td>
     		<td>
-    		 	<a href="cls/updateClsUI?id=${cls.id}">更新</a>
+    		 	<a href="cls/updateClsUI?id=${cls.id}">修改班级名</a>
     			<a href="cls/delCls?id=${cls.id}">删除</a>
     		</td>
     	</tr>
     </c:forEach>
-    </table>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
   </body>
 </html>

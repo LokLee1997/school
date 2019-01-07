@@ -17,6 +17,7 @@ import com.school.pojo.Teacherclass;
 import com.school.pojo.Teachers;
 import com.school.service.ClassCourseService;
 import com.school.service.ClassesService;
+import com.school.service.StudentService;
 import com.school.service.TeacherClassService;
 
 @Controller
@@ -28,6 +29,8 @@ public class ClassesController {
 	private ClassCourseService classCourseService;
 	@Resource
 	private TeacherClassService teacherClassService;
+	@Resource
+	private StudentService studentService;
 	@RequestMapping("/addClsUI")
 	public String addClsUI(){
 		return "addCls";
@@ -87,6 +90,13 @@ public class ClassesController {
 		int classid=Integer.parseInt(request.getParameter("classid"));
 		int teachertno=Integer.parseInt(request.getParameter("teachertno"));
 		teacherClassService.delTeacher_Class(classid, teachertno);
+		return "redirect:clsList";
+	}
+	@RequestMapping("/delClsStu")
+	public String delString(HttpServletRequest request){
+		String id = String.valueOf(request.getParameter("sid"));
+		Student student = studentService.getStudentById(id);
+		studentService.setStudentCls(student);
 		return "redirect:clsList";
 	}
 	@RequestMapping("/updateClsUI")

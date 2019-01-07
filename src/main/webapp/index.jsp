@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -7,6 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  
     <base href="<%=basePath%>">
     
     <title>首页</title>
@@ -18,30 +20,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<%@ include file="resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <a href="stu/addStuUI">添加学生</a><br>
-    <a href="stu/stuList">学生列表</a><br>
-    <a>--------------------------------</a><br>
-    <a href="cls/addClsUI">添加班级</a><br>
-    <a href="cls/clsList">班级列表</a><br>
-    <a>--------------------------------</a><br>
-    <a href="tes/addtesUI">添加职工</a><br>
-    <a href="tes/tesList">职工列表</a><br>
-    <a>--------------------------------</a><br>
-    <a href="dep/addDepUI">添加部门</a><br>
-    <a href="dep/depList">部门列表</a><br>
-     <a>--------------------------------</a><br>
-    <a href="cou/addCouUI">添加课程</a><br>
-    <a href="cou/couList">课程列表</a><br>
-     <a>--------------------------------</a><br>
-    <a href="charge/addChargeUI">添加收费</a><br>
-    <a href="charge/chargeList">收费目录</a><br>
-    <a>--------------------------------</a><br>
-    <a href="att/attList">缺勤信息</a><br>
-     <a>--------------------------------</a><br>
-    <a href="lunch/addLunchUI">添加午餐菜单</a><br>
-    <a href="lunch/lunchList">午餐菜单目录</a><br>
+    
   </body>
 </html>

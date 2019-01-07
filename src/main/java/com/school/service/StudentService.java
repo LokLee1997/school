@@ -16,4 +16,5 @@ public interface StudentService {
 	public List<Student> getStudentsByClass(int id);
 	public List<Charge> getChargesBySid(String sid);
 	public List<Attendance> getAttendancesBySid(String sid);
+	public void setStudentCls(Student student);
 }

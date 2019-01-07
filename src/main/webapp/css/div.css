@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+.container{
+	display:table;
+	height:100%;}
+.row{
+	display:table-cell;
+	vertical-align:middle;}
+.row-centered{
+	text-align:center
+	}
+.col-centered{
+	display:inline-block;
+	float:none;
+	text-align:left;
+	margin-right:-4px;}

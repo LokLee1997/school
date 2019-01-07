@@ -130,4 +130,11 @@
 		</set>
 		where sid= #{sid,jdbcType=VARCHAR}
 	</update>
+	<update id="setStudentClass" parameterType="com.school.pojo.Student">
+		update student
+		<set>
+			class_id=0
+		</set>
+		where sid= #{sid,jdbcType=VARCHAR}
+	</update>
 </mapper>

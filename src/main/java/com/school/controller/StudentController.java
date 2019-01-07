@@ -44,6 +44,7 @@ public class StudentController {
 		return "redirect:stuList";
 	}
 	
+	
 	@RequestMapping("/updateStuUI")
 	public String updateStuUI(HttpServletRequest request,Model model){
 		String id = String.valueOf(request.getParameter("sid"));

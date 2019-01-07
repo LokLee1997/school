@@ -53,6 +53,7 @@ public class AttendanceController {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Attendance attendance = attendanceService.getAttendanceById(id);
 		attendance.setState(Integer.parseInt(request.getParameter("state")));
+		attendance.setDate(String.valueOf(request.getParameter("date")));
 		attendanceService.updateAtt(attendance);
 		return "redirect:attList";
 	}

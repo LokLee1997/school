@@ -19,23 +19,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<%@ include file="../resource/link.html" %>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.1.js"></script>
+   <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body>
-    <div align="center">
-    <form action="cls/addClsTes" method="post" id="addClsTes">
-    	<input type="hidden" value="${classes.id}" id="classid" name="classid">
-    	<label>班级名字：</label>${classes.classname}<br>
-    	<label>教师：</label>
-    	<select name="teachertno">
-    		<option value="1">李成才</option>
-    		<option value="3">王萍</option>
-    		<option value="4">刘斌</option>
-    	</select>
-    	<input type="submit" value="添加"/>
-    	<input type="reset" value="重置"/>
-    </form>
-    </div>
+    
+   <div class="container">
+  <div class="row row-centered"> 
+  	<div class="col-md-6 col-md-offset-3 col-centered">
+    <h2>添加班级教师</h2>
+    <form class="form-horizontal" method="post" action="cls/addClsTes" name="addClsTes" id="addClsTes">
+  		<div class="form-group">
+  				<input type="hidden" value="${classes.id}" id="classid" name="classid">
+    			<label for="classnamelabel" class="control-label col-md-3">班级名字：</label>
+                <div class="col-md-6"> 
+                <label for="classname" class="control-label">${classes.classname}</label>	                
+                </div>
+    	</div>
+        <div class="form-group">
+        		<label for="teachername" class="control-label col-md-3">教师：</label>
+                <div class="col-md-6">
+    				<select name="teachertno" class="form-control">
+    					<option value="1">李成才</option>
+    					<option value="3">王萍</option>
+    					<option value="4">刘斌</option>
+    				</select>	
+                </div>
+        </div>
+        <div class="form-group">
+        <div class="col-md-offset-4">
+    			<input class="btn btn-info" type="submit" value="添加"/>
+    	</div>
+        </div>
+        </form>
+  </div>
+  </div>
+  </div>
   </body>
 </html>

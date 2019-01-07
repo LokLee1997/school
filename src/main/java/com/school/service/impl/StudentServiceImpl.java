@@ -78,4 +78,10 @@ public class StudentServiceImpl implements StudentService {
 		return list;
 	}
 
+	@Override
+	public void setStudentCls(Student student) {
+		// TODO Auto-generated method stub
+		studentMapper.setStudentClass(student);
+	}
+
 }
