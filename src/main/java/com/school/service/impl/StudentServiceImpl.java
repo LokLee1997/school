@@ -84,4 +84,11 @@ public class StudentServiceImpl implements StudentService {
 		studentMapper.setStudentClass(student);
 	}
 
+	@Override
+	public List<Student> getStudentsByKeyWord(String keyword) {
+		// TODO Auto-generated method stub
+		List<Student> list = studentMapper.getStudentsByKeyWord(keyword);
+		return list;
+	}
+
 }

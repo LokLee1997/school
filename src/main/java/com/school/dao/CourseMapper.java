@@ -11,4 +11,5 @@ public interface CourseMapper {
 	public void updateCourse(Course course);
 	public List<Course> getCourses();
 	public Course getCourseById(int id);
+	public List<Course> getCoursesByKeyword(String keyword);
 }

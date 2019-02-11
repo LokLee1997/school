@@ -10,4 +10,5 @@ public interface LunchService {
 	public void updateLunch(Lunch lunch);
 	public Lunch getLunchByid(int id);
 	public List<Lunch> getLunchs();
+	public List<Lunch> getLunchsByKeyword(String keyword);
 }

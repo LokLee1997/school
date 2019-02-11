@@ -8,13 +8,10 @@ import com.school.pojo.Teachers;
 
 public interface TeachersMapper {
 	public void addTeachers(Teachers teachers);
-	
 	public void deleteTeachers(int id);
-	
 	public void updateTeachers(Teachers teachers);
-	
 	public Teachers getTeachersById(int id);
-	
 	public List<Teachers> getTeachersList();
 	public List<Classes> getTeacherClasses(int id);
+	public List<Teachers> getTeachersByKeyword(String keyword);
 }

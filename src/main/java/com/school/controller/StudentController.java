@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
 import com.school.pojo.Student;
@@ -78,8 +81,11 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/stuList")
-	public String stuList(HttpServletRequest request,Model model){
+	public String stuList(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model model){
+		PageHelper.startPage(page,10);
 		List<Student> list = studentService.getStu();
+		PageInfo<Student> p=new PageInfo<Student>(list);
+		model.addAttribute("page",p);
 		model.addAttribute("list",list);
 		return "stuList";
 	}

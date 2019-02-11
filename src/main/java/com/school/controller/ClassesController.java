@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.school.pojo.Classcourse;
 import com.school.pojo.Classes;
 import com.school.pojo.Course;
@@ -55,7 +58,8 @@ public class ClassesController {
 		classcourse.setClassid(Integer.parseInt(request.getParameter("classid")));
 		classcourse.setCourseno(Integer.parseInt(request.getParameter("courseno")));
 		classCourseService.addClass_Course(classcourse);
-		return "redirect:clsList";
+		int id = Integer.parseInt(request.getParameter("classid"));
+		return "redirect:clsInfo?id="+id;
 	}
 	@RequestMapping("/addClsTesUI")
 	public String addClsTesUI(HttpServletRequest request,Model model){
@@ -70,7 +74,8 @@ public class ClassesController {
 		teacherclass.setClassid(Integer.parseInt(request.getParameter("classid")));
 		teacherclass.setTeachertno(Integer.parseInt(request.getParameter("teachertno")));
 		teacherClassService.addTeacher_Class(teacherclass);
-		return "redirect:clsList";
+		int id = Integer.parseInt(request.getParameter("classid"));
+		return "redirect:clsInfo?id="+5;
 	}
 	@RequestMapping("/delCls")
 	public String delCls(HttpServletRequest request){
@@ -83,21 +88,24 @@ public class ClassesController {
 		int classid=Integer.parseInt(request.getParameter("classid"));
 		int courseno=Integer.parseInt(request.getParameter("courseno"));
 		classCourseService.delClass_Course(classid, courseno);
-		return "redirect:clsList";
+		int id = Integer.parseInt(request.getParameter("classid"));
+		return "redirect:clsInfo?id="+id;
 	}
 	@RequestMapping("/delClsTes")
 	public String delClsTes(HttpServletRequest request){
 		int classid=Integer.parseInt(request.getParameter("classid"));
 		int teachertno=Integer.parseInt(request.getParameter("teachertno"));
 		teacherClassService.delTeacher_Class(classid, teachertno);
-		return "redirect:clsList";
+		int id = Integer.parseInt(request.getParameter("classid"));
+		return "redirect:clsInfo?id="+id;
 	}
 	@RequestMapping("/delClsStu")
 	public String delString(HttpServletRequest request){
-		String id = String.valueOf(request.getParameter("sid"));
-		Student student = studentService.getStudentById(id);
+		String sid = String.valueOf(request.getParameter("sid"));
+		Student student = studentService.getStudentById(sid);
 		studentService.setStudentCls(student);
-		return "redirect:clsList";
+		int id = Integer.parseInt(request.getParameter("classid"));
+		return "redirect:clsInfo?id="+id;
 	}
 	@RequestMapping("/updateClsUI")
 	public String updateClsUI(HttpServletRequest request,Model model){
@@ -118,8 +126,11 @@ public class ClassesController {
 	
 	
 	@RequestMapping("/clsList")
-	public String stuList(HttpServletRequest request,Model model){
+	public String stuList(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model model){
+		PageHelper.startPage(page,10);
 		List<Classes> list = classesService.getCls();
+		PageInfo<Classes> p = new PageInfo<Classes>(list);
+		model.addAttribute("page",p);
 		model.addAttribute("list",list);
 		return "clsList";
 	}

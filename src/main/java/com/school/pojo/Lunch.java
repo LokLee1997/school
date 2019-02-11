@@ -6,7 +6,13 @@ public class Lunch {
 	private String caipin;
 	private int cookerid;
 	private Teachers cooker;
-	
+	private String keyword;
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public Teachers getCooker() {
 		return cooker;
 	}

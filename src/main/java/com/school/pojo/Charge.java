@@ -10,6 +10,13 @@ public class Charge {
 	private int ispay;
 	private String studentid;
 	private Student student;
+	private String keyword;
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public Student getStudent() {
 		return student;
 	}

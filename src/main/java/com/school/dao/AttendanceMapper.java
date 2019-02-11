@@ -10,4 +10,5 @@ public interface AttendanceMapper {
 	public void updateAtt(Attendance attendance);
 	public Attendance getAttendanceById(int id);
 	public List<Attendance> getAttendances();
+	public List<Attendance> getAttendancesByKeyword(String keyword);
 }

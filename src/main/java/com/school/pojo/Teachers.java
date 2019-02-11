@@ -13,7 +13,13 @@ public class Teachers {
 	private int depart;
 	private Depart departs;
 	private List<Classes> classes;
-	
+	private String keyword;
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public List<Classes> getClasses() {
 		return classes;
 	}

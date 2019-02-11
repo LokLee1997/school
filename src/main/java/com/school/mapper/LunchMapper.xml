@@ -12,6 +12,8 @@
 			<result property="tname" column="tname"/>
 		</association>
 	</resultMap>
+	
+	<!-- 根据id查询 -->
 	<select id="getLunchById" resultMap="BaseResultMap">
 		SELECT l.id,l.caipin,l.date,t.tname
 		FROM lunch l
@@ -19,7 +21,17 @@
 		on l.cooker=t.tno
 		WHERE l.id= #{l.id,jdbcType=INTEGER}
 	</select>
-	
+	<!-- 根据关键词 -->
+	<select id="getLunchsBykeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT l.id,l.caipin,l.date,t.tname
+		FROM lunch l
+		INNER JOIN teachers t
+		on l.cooker=t.tno
+		WHERE l.caipin like CONCAT('%',#{keyword},'%')
+		or l.date like CONCAT('%',#{keyword},'%')
+		or t.tname like CONCAT('%',#{keyword},'%')
+	</select>
+	<!-- 获取全部 -->
 	<select id="getLunchs" resultMap="BaseResultMap">
 		SELECT l.id,l.caipin,l.date,t.tname
 		FROM lunch l

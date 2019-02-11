@@ -49,6 +49,13 @@ public class CourseServiceImpl implements CourseService {
 		return courseMapper.getCourseById(id);
 	}
 
+	@Override
+	public List<Course> getCoursesByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		List<Course> list = courseMapper.getCoursesByKeyword(keyword);
+		return list;
+	}
+
 
 
 	

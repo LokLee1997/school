@@ -54,4 +54,11 @@ public class TeachersServiceImpl implements TeachersService {
 		List<Classes> list = teachersMapper.getTeacherClasses(id);
 		return list;
 	}
+	
+	@Override
+	public List<Teachers> getTeachersByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		List<Teachers> list = teachersMapper.getTeachersByKeyword(keyword);
+		return list;
+	}
 }

@@ -27,18 +27,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div class="container">
+    <div class="container jumbotron well" style="background-color: #F0F0F0">
 	<div class="row clearfix">
 		<div class="col-md-8 col-md-offset-2 column">
 		<div style="text-align: right"><a href="stu/updateStuUI?sid=${student.sid}"><input type="button" class="btn btn-default" value="更新学生信息"></a></div>
-		<h4>
-		<div><label>学生学号:${student.sid}</label></div>
-    	<div><label>学生姓名:${student.sname}</label></div>
-    	<div><label>学生性别:${student.ssex}</label></div>
-    	<div><label>出生日期:${student.sbirthday}</label></div>
-    	<div><label>学生班级:${student.classes.classname}</label></div>
-    	</h4>
-    	<c:forEach items="${cList}" var="c">
+		<div style="background:#F0F0F0">
+			<h4>
+				<div style="width:33%; float: left;"><label>学生学号:${student.sid}</label>
+    			<label>学生姓名:${student.sname}</label></div>
+    			<div><label>学生性别:${student.ssex}</label><br>
+    			<label>出生日期:${student.sbirthday}</label></div>
+    			<div><label>学生班级:${student.classes.classname}</label></div>
+    		</h4>
+		</div>
+		</div>
+		</div>
+		</div>
+    	
+	<div class="container jumbotron well ">
+	<div class="row clearfix ">
+    	<div class="col-md-8 col-md-offset-2 ">
+			<div class="tabbable" id="tabs-39197">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						 <a href="#panel-575446" data-toggle="tab">缴费列表</a>
+					</li>
+					<li>
+						 <a href="#panel-892090" data-toggle="tab">缺勤列表</a>
+					</li>
+					
+				</ul>
+				<div class="tab-content">
+				<!-- 第一个 -->
+				<div class="tab-pane" id="panel-575446">
+			<c:forEach items="${cList}" var="c">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -66,15 +88,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				</c:otherwise>
     			</c:choose>
     			</td>
-    		
+    			
     		</c:forEach>
     		</tr>
 				</tbody>
 		</c:forEach>
 			</table>
 		</div>
+					<!-- 第一个结束-->
+					<div class="tab-pane" id="panel-892090">
+						<!-- 第二个 -->
 	
-		<div class="col-md-8 col-md-offset-2 column">
+					
+		
 			<table class="table table-hover">
 				<c:forEach items="${aList}" var="a">
 				<thead>
@@ -104,8 +130,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:forEach>
 			</table>
 		</div>
-	</div>
-</div>
+	
+		
+				</div>
+			</div>
+		</div>
+	</div>	
+
  
   </body>
 </html>

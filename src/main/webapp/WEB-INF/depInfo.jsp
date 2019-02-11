@@ -27,13 +27,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div class="container">
+    <div class="container jumbotron well" style="background-color: #F0F0F0">
 	<div class="row clearfix">
 		<div class="col-md-8 col-md-offset-2 column">
 		<h2>
 		<div><label>部门名称:${depart.dname}</label></div>
    		<div><label>部门人数:${num}</label></div>
    		</h2>
+			
+		</div>
+	</div>
+</div>
+  <div class="container jumbotron well" style="background-color: #F0F0F0">
+	<div class="row clearfix">
+		<div class="col-md-8 col-md-offset-2 column">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -58,6 +65,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 </div>
- 
   </body>
 </html>

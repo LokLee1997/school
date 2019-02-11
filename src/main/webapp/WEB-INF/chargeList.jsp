@@ -28,12 +28,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
  
-      <div class="container">
+      <div class="container jumbotron well" style="background-color: #F0F0F0">
 	<div class="row clearfix">
 		<div class="col-md-8 col-md-offset-2 column">
-		<h2>收费表</h2>
+		
 			<table class="table table-hover">
 				<thead>
+					<tr>
+						<th><h2>收费列表</h2></th>
+						<th colspan="5">
+							<form class="bs-example bs-example-form" role="form" action="search/chargeList" method="get">
+							<div class="row">
+								<div align="right">
+									<div class="input-group">
+									<input type="text" class="form-control" name="keyword" placeholder="请输入关键词">
+									<span class="input-group-btn">
+									<button class="btn btn-default" type="submit">
+										搜索
+									</button>
+									</span>
+									</div>
+								</div>
+							</div>
+						</form>
+						</th>
+					</tr>
 					<tr>
 						<th>学生学号</th>
     		<th>学生名字</th>
@@ -64,15 +83,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</td>
     		<td>
     		<c:if test="${charge.ispay=='0'}">
-    			<a href="charge/updateChargeState?id=${charge.id}">确认缴费</a>
+    			<a href="charge/updateChargeState?id=${charge.id}" onclick="if(confirm('确认已缴费?')==false)return false;">确认缴费</a>
     		 </c:if>	
     		 	<a href="charge/updateChargeUI?id=${charge.id}">更新</a>
-    			<a href="charge/deleteCharge?id=${charge.id}">删除</a>
+    			<a href="charge/deleteCharge?id=${charge.id}" onclick="if(confirm('确认删除?')==false)return false;">删除</a>
     		</td>
     	</tr>
     </c:forEach>
 				</tbody>
 			</table>
+			<div class="col-md-8 col-md-offset-2 column">
+		<p align="center">当前第${page.pageNum}页/共${page.pages}页/共有${page.total}条记录</p>
+		<div align="center">
+		<ul class="pagination">
+				<li>
+					 <a href="charge/chargeList?page=${page.firstPage}">第一页</a>
+				</li>
+				<li>
+					 <a href="charge/chargeList?page=${page.prePage}">上一页</a>
+				</li>
+				<li>
+					 <a href="charge/chargeList?page=${page.nextPage}">下一页</a>
+				</li>
+				<li>
+					<a href="charge/chargeList?page=${page.lastPage}">最后页</a>
+				</li>
+			</ul>
+			</div>
+			</div>
 		</div>
 	</div>
 </div>

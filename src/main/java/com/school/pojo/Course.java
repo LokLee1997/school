@@ -11,7 +11,13 @@ public class Course {
 	private String detail;
 	private List<Teachers> teachers;
 	private List<Classes> classes;
-	
+	private String keyword;
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public String getDetail() {
 		return detail;
 	}

@@ -16,23 +16,37 @@
 			<result property="classname" column="classname"/>
 		</association>
 	</resultMap>
+	<!-- 根据id查询 -->
 	<select id="getAttendanceById" resultMap="BaseResultMap">
 		SELECT a.id,a.date,a.state,s.sid,s.sname,c.classname
 		FROM attendance a
-		INNER JOIN student s
+		LEFT JOIN student s
 		ON a.studentid = s.sid
-		INNER JOIN class c
+		LEFT JOIN class c
 		ON s.class_id = c.id
 		WHERE a.id= #{a.id,jdbcType=INTEGER}
 	
 	</select>
-	
+	<!-- 根据关键字 -->
+	<select id="getAttendancesByKeyword" resultMap="BaseResultMap">
+		SELECT a.id,a.date,a.state,s.sid,s.sname,c.classname
+		FROM attendance a
+		LEFT JOIN student s
+		ON a.studentid = s.sid
+		LEFT JOIN class c
+		ON s.class_id = c.id
+		WHERE s.sname like CONCAT('%',#{keyword},'%')
+		or c.classname like CONCAT('%',#{keyword},'%')
+		or a.date like CONCAT('%',#{keyword},'%')
+		
+	</select>
+	<!-- 获取全部 -->
 	<select id="getAttendances" resultMap="BaseResultMap">
 		SELECT a.id,a.date,a.state,s.sid,s.sname,c.classname
 		FROM attendance a
-		INNER JOIN student s
+		LEFT JOIN student s
 		ON a.studentid = s.sid
-		INNER JOIN class c
+		LEFT JOIN class c
 		ON s.class_id = c.id
 	</select>
 	<insert id="addAtt" parameterType="com.school.pojo.Attendance">

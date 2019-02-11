@@ -27,9 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  <div class="container jumbotron well" style="background-color: #F0F0F0">
   <div align="center" >
     <div><label>课程名称:</label>${course.cname}</div>
     <div><label>课程信息:</label>${course.detail }
+    </div>
     </div>
     </div>
   </body>

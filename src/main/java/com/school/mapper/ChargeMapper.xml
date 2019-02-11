@@ -13,7 +13,7 @@
 			<result property="sname" column="sname"/>
 		</association>
 	</resultMap>
-	
+	<!-- 根据id查询 -->
 	<select id="getChargeById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id
@@ -26,7 +26,7 @@
 		where 
 			c.id=#{c.id,jdbcType=INTEGER}
 	</select>
-	
+	<!-- 获取全部 -->
 	<select id="getCharges" resultMap="BaseResultMap">
 		select
 			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id
@@ -38,6 +38,19 @@
 			c.studentid=s.sid
 		order by
 			c.ispay,s.sid,s.sname
+	</select>
+	<!-- 根据关键字 -->
+	<select id="getChargesBykeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id
+		from 
+			charge c
+		inner join
+			student s
+		on 
+			c.studentid=s.sid
+		where s.sname like CONCAT('%',#{keyword},'%')
+		or c.chargeitem like CONCAT('%',#{keyword},'%')
 	</select>
 	<insert id="addCharge" parameterType="com.school.pojo.Charge">
 		insert into charge

@@ -20,6 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<%@ include file="../resource/link.html" %>
+	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
@@ -27,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   
-    <div class="container">
+    <div class="container jumbotron well" style="background-color: #F0F0F0">
 	<div class="row row-centered">
 		<div class="col-md-8 col-md-offset-2 col-centered">
 			<form role="form-horizontal" action="att/addAtt" method="post" id="addAtt">
@@ -62,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="form-group">
 					 <label for="date" class="col-md-2 control-label" style="text-align: right;">日期：</label>
 					 <div class="col-md-4 input-group input-group-sm">
-					 	<input name="date" type="text" class="form-control"/>
+					 	<input name="date" type="text" class="form-control" placeholder="日期格式：XX-XX-XX"/>
 					 </div>
 				</div>
 				

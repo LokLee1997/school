@@ -11,6 +11,7 @@
     <spring.version>4.2.0.RELEASE</spring.version>
   </properties>
   <dependencies>
+  	
     <dependency>
     	<groupId>log4j</groupId>
     	<artifactId>log4j</artifactId>

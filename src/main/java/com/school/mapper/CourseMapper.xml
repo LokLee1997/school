@@ -24,6 +24,11 @@
  		from
  			course 
 	</select>
+	<select id="getCoursesByKeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select cno,cname,detail
+		from course
+		where cname like CONCAT('%',#{keyword},'%')
+	</select>
 	<insert id="addCourse" parameterType="com.school.pojo.Course">
 		insert into course
 		<trim prefix="(" suffix=")" suffixOverrides=",">

@@ -44,5 +44,12 @@ public class AttendanceServiceImpl implements AttendanceService{
 		// TODO Auto-generated method stub
 		return attendanceMapper.getAttendanceById(id);
 	}
+
+	@Override
+	public List<Attendance> getAttendancesByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		List<Attendance> list = attendanceMapper.getAttendancesByKeyword(keyword);
+		return list;
+	}
 	
 }

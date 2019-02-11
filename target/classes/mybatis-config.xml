@@ -6,9 +6,11 @@
 	<typeAliases>
 		<package name="com.school.pojo"/>
 	</typeAliases>
+	
 	<plugins>
 		<!-- pageHelper -->
 		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<property name="dialect" value="mysql"/>
 			<property name="offserAsPageNum" value="true"/>
 			<property name="rowBoundsWithCount" value="true"/>
 			<property name="pageSizeZero" value="true"/>

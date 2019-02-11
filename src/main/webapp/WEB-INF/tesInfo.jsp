@@ -22,22 +22,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<%@ include file="../resource/link.html" %>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-table.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
+   <script src="js/bootstrap-table.js"></script>
+   <script src="js/bootstrap-table-zh-CN.js"></script>
+   <script type="text/javascript">
+   	
+   
+   </script>
   </head>
   
   <body>
   
-      <div class="container">
+      <div class="container jumbotron well" style="background-color: #F0F0F0">
 	<div class="row clearfix">
-		<div class="col-md-8 col-md-offset-2 column">
+		<div class="col-md-8 col-md-offset-2 column" >
+		<div style="background:#F0F0F0">
 		<h4>
 			<div><label>职工姓名：${teacher.tname}</label></div>
     		<div><label>职工性别：${teacher.tsex}</label></div>
     		<div><label>出生日期：${teacher.tbirthday}</label></div>
     		<div><label>所属部门：${teacher.departs.dname}</label></div>
 		</h4>
-			<table class="table table-hover">
+		</div>
+			
+		</div>
+	</div>
+	</div>
+	<div class="container jumbotron well">
+		<div class="row clearfix">
+		<div class="col-md-8 col-md-offset-2 column" >
+		<table class="table table-hover" id="tes_table">
 			<c:forEach items="${classes}" var="c">
 				<thead>
 					<tr>
@@ -59,8 +75,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tbody>
 		</c:forEach>
 			</table>
-		</div>
+	
 	</div>
+</div>
 </div>
  
   </body>

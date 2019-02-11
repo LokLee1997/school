@@ -53,4 +53,11 @@ public class ChargeServiceImpl implements ChargeService {
 		return charge;
 	}
 
+	@Override
+	public List<Charge> getChargesBykeyword(String keyword) {
+		// TODO Auto-generated method stub
+		List<Charge> list = chargeMapper.getChargesBykeyword(keyword);
+		return list;
+	}
+
 }

@@ -11,4 +11,5 @@ public interface ChargeService {
 	public void deleteCharge(int id);
 	public List<Charge> getCharges();
 	public Charge getChargeById(int id);
+	public List<Charge> getChargesBykeyword(String keyword);
 }

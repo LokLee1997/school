@@ -14,6 +14,13 @@ public class Student {
 	private Classes classes;
 	private List<Charge> charge;
 	private List<Attendance> attendances;
+	private String keyword;
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public List<Attendance> getAttendances() {
 		return attendances;
 	}

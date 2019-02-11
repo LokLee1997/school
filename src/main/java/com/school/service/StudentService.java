@@ -17,4 +17,5 @@ public interface StudentService {
 	public List<Charge> getChargesBySid(String sid);
 	public List<Attendance> getAttendancesBySid(String sid);
 	public void setStudentCls(Student student);
+	public List<Student> getStudentsByKeyWord(String keyword);
 }

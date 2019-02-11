@@ -46,4 +46,11 @@ public class LunchServiceImpl implements LunchService {
 		return list;
 	}
 
+	@Override
+	public List<Lunch> getLunchsByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		List<Lunch> list = lunchMapper.getLunchsBykeyword(keyword);
+		return list;
+	}
+
 }

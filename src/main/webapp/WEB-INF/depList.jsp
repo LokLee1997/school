@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    
-    <div class="container">
+    <div class="container jumbotron well" style="background-color: #F0F0F0">
 	<div class="row clearfix">
 		<div class="col-md-8 col-md-offset-2 column">
 		<h2>部门表</h2>
@@ -47,12 +47,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td><a href="dep/depInfo?did=${dep.did}">${dep.dname}</a></td>
     		<td>
     		 	<a href="dep/updateDepUI?did=${dep.did}">更新</a>
-    			<a href="dep/delDep?did=${dep.did}">删除</a>
+    			<a href="dep/delDep?did=${dep.did}" onclick="if(confirm('确认删除?')==false)return false;">删除</a>
     		</td>
     	</tr>
     </c:forEach>
 				</tbody>
 			</table>
+			<div class="col-md-8 col-md-offset-2 column">
+		<p align="center">当前第${page.pageNum}页/共${page.pages}页/共有${page.total}条记录</p>
+		<div align="center">
+		<ul class="pagination">
+				<li>
+					 <a href="dep/depList?page=${page.firstPage}">第一页</a>
+				</li>
+				<li>
+					 <a href="dep/depList?page=${page.prePage}">上一页</a>
+				</li>
+				<li>
+					 <a href="dep/depList?page=${page.nextPage}">下一页</a>
+				</li>
+				<li>
+					<a href="dep/depList?page=${page.lastPage}">最后页</a>
+				</li>
+			</ul>
+			</div>
+			</div>
 		</div>
 	</div>
 </div>

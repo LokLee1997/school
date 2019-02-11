@@ -10,6 +10,13 @@ public class Attendance {
 	private String studentid;
 	private Student student;
 	private Classes classes;
+	private String keyword;
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public Classes getClasses() {
 		return classes;
 	}

@@ -10,4 +10,5 @@ public interface LunchMapper {
 	public void updateLunch(Lunch lunch);
 	public Lunch getLunchById(int id);
 	public List<Lunch> getLunchs();
+	public List<Lunch> getLunchsBykeyword(String keyword);
 }

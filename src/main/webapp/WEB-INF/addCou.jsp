@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    
-    <div class="container">
+    <div class="container jumbotron well" style="background-color: #F0F0F0">
   <div class="row row-centered"> 
   	<div class="col-md-6 col-md-offset-3 col-centered">
     <h2>添加学生</h2>

@@ -20,13 +20,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<%@ include file="../resource/link.html" %>
+	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
   </head>
   
   <body> 
-  <div class="container">
+  <div class="container jumbotron well" style="background-color: #F0F0F0">
   <div class="row row-centered"> 
   	<div class="col-md-6 col-md-offset-3 col-centered">
     <h2>添加学生</h2>
@@ -45,8 +46,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="form-group">
         		<label for="studentssex" class="control-label col-md-3">性别：</label>
-                <div class="col-md-6">
-        			<input class="form-control" type="text" name="ssex" id="ssex"/><span id="sexSpan"></span>				        		
+                <div class="col-md-6">				        		
+                	<select name="ssex" class="form-control">
+        				<option value="男">男</option>
+        				<option value="女">女</option>
+        			</select>	
                 </div>
         </div>
         <div class="form-group">

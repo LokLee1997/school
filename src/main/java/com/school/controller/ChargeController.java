@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.school.pojo.Charge;
 import com.school.pojo.Classes;
 import com.school.service.ChargeService;
@@ -64,8 +67,11 @@ public class ChargeController {
 		return "redirect:chargeList";
 	}
 	@RequestMapping("/chargeList")
-	public String chargeList(HttpServletRequest request,Model model){
+	public String chargeList(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model model){
+		PageHelper.startPage(page,10);
 		List<Charge> list = chargeService.getCharges();
+		PageInfo<Charge> p = new PageInfo<Charge>(list);
+		model.addAttribute("page",p);
 		model.addAttribute("list",list);
 		return "chargeList";
 	}

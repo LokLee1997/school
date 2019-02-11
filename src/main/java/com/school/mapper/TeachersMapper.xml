@@ -49,12 +49,20 @@
 			teachers t
 		inner join
 			depart d
-		on 
-		  	t.depart=d.did
+		on
+			t.depart = d.did
 		where 
 			t.tno=#{t.tno,jdbcType=INTEGER}
 	</select>
-	
+	<!-- 模糊查询教工 -->
+	<select id="getTeachersByKeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT t.tno,t.tname,t.tsex,t.tbirthday,d.dname
+		FROM teachers t
+		LEFT JOIN depart d
+		ON t.depart=d.did
+		where t.tname LIKE CONCAT('%',#{keyword},'%')
+		or d.dname LIKE CONCAT('%',#{keyword},'%')
+	</select>
 	<select id="getTeachersList" resultMap="BaseResultMap">
  		select
  			t.tno,
@@ -64,7 +72,7 @@
 			d.dname		
  		from 
 			teachers t
-	    inner join
+	    left join
 	    	depart d
 	    on 
 	    	t.depart=d.did

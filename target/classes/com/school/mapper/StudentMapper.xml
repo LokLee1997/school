@@ -33,7 +33,7 @@
 		SELECT
 			a.id,a.date,a.state
 		FROM attendance a
-		INNER JOIN student s
+		left JOIN student s
 		ON a.studentid = s.sid
 		WHERE s.sid=#{s.sid,jdbcType=VARCHAR}
 	</select>
@@ -42,7 +42,7 @@
 			c.chargeitem,c.price,c.ispay
 		from
 		 	charge c
-		inner join
+		left join
 			student s
 		on 
 			c.studentid=s.sid
@@ -51,11 +51,20 @@
 	<select id="getStudentsByClass" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select c.id,s.sid,s.sname
 		from student s
-		inner join class c
+		left join class c
 		on s.class_id=c.id
 		where c.id=#{c.id,jdbcType=INTEGER}
 	</select>
-	
+	<select id="getStudentsByKeyWord" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT s.sid,s.sname,s.ssex,s.sbirthday,c.classname
+		FROM student s
+		LEFT JOIN class c
+		ON s.class_id= c.id
+		where
+		s.sname LIKE CONCAT('%',#{keyword},'%')
+		or s.sid LIKE CONCAT('%',#{keyword},'%')
+		or c.classname LIKE CONCAT('%',#{keyword},'%')
+	</select>
 	<select id="getStudentById" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select 
 			student.sid,
@@ -65,14 +74,12 @@
 			class.classname
 		from 
 			student
-		inner join
+		left join
 			class
-		where 
-			student.sid=#{student.sid,jdbcType=VARCHAR}
-		and
-			student.class_id=class.id
-		order by
-			student.sid
+		on 
+			class.id=student.class_id
+		where
+		    student.sid=#{student.sid,jdbcType=VARCHAR}
 	</select>
 	
 	<select id="getStudentList" resultMap="BaseResultMap">
@@ -84,10 +91,10 @@
  			class.classname 
  		from
  			student 
- 		inner join 
+ 		left join 
  			class
-		where 
- 			student.class_id=class.id 
+		on 
+ 			student.class_id=class.id
  		order by  
  			student.sid  
 	</select>
@@ -133,7 +140,9 @@
 	<update id="setStudentClass" parameterType="com.school.pojo.Student">
 		update student
 		<set>
-			class_id=0
+		
+			class_id=NULL
+		
 		</set>
 		where sid= #{sid,jdbcType=VARCHAR}
 	</update>

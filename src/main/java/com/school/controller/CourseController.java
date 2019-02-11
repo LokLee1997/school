@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.school.pojo.Course;
 import com.school.pojo.Teachers;
 import com.school.service.CourseService;
@@ -62,8 +65,11 @@ public class CourseController {
 	
 	
 	@RequestMapping("/couList")
-	public String stuList(HttpServletRequest request,Model model){
+	public String stuList(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model model){
+		PageHelper.startPage(page,10);
 		List<Course> list = courseService.getCourses();
+		PageInfo<Course> p = new PageInfo<Course>(list);
+		model.addAttribute("page",p);
 		model.addAttribute("list",list);
 		return "couList";
 	}
