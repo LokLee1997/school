@@ -23,6 +23,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+   $(document).ready(function(e) {
+    //点击验证
+	 $("#add").click(function(){ 
+							if($("#chargeitem").val()=='' || $.trim($("#chargeitem").val())==''){
+								alert("请输入收费的项目");
+								return false;
+							}else if($("#price").val()=='' || $.trim($("#price").val())==''){
+								alert("请输入需要交纳的金额");
+								return false;
+							}else{
+							var add=document.getElementById("addCharge");
+							add.submit();
+							}	
+	})
+	//获取学生列表
+	$.ajax({		  
+		type:'POST',  //请求类型
+		url:'http://localhost:8080/school/ajax/getStu',
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			var data2= eval(data);
+			for(var i in data2){
+				$("#studentid").append(
+				"<option value='"+data2[i].sid+"'>"+data2[i].sid+"-"+data2[i].sname+"</option>"
+				);
+			}
+			},
+		error:function(msg){}
+		});
+   });
+   </script>
   </head>
   
   <body>
@@ -40,25 +73,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	 <div class="form-group">
         		<label for="dateLabel" class="control-label col-md-3">需缴价格：</label>
                 <div class="col-md-6">
-        			<input class="form-control" type="text" name="price" id="price" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" />				        		
+        			<input class="form-control" type="text" name="price" id="price" onKeyPress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" />				        		
                 </div>
         </div>
     	<div class="form-group">
         		<label for="studentname" class="control-label col-md-3">需交费学生：</label>
                 <div class="col-md-6">
-        			<select name="studentid" class="form-control">
-    					<option value="2019001">2019001-王丽</option>
-    					<option value="2019002">2019002-罗拉</option>
-    					<option value="2019003">2019003-罗兰</option>
-    					<option value="2019004">2019004-李丽</option>
-    					<option value="2019005">2019005-罗什</option>
+        			<select name="studentid" id="studentid" class="form-control">
+    					
     				</select>			        		
                 </div>
         </div>
        
         <div class="form-group">
         <div class="col-md-offset-4">
-    			<input class="btn btn-info" type="submit" value="添加"/>
+    			<input class="btn btn-info" type="button" id="add" value="添加" onClick="if(confirm('确认信息是否正确?')==false)return false;"/>
     			<input class="btn btn-info" type="reset" value="重置"/>
     	</div>
         </div>

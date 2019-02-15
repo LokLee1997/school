@@ -18,4 +18,5 @@ public interface StudentService {
 	public List<Attendance> getAttendancesBySid(String sid);
 	public void setStudentCls(Student student);
 	public List<Student> getStudentsByKeyWord(String keyword);
+	public boolean checksid(String sid);
 }

@@ -23,8 +23,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<%@ include file="resource/link.html" %>
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery-3.1.1.js"></script>
-   <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.1.1.js" type="text/javascript" ></script>
+   <script src="js/bootstrap.min.js" type="text/javascript" ></script>
   </head>
   
   <body>

@@ -90,5 +90,15 @@ public class StudentServiceImpl implements StudentService {
 		List<Student> list = studentMapper.getStudentsByKeyWord(keyword);
 		return list;
 	}
-
+	@Override
+	public boolean checksid(String sid) {
+		// TODO Auto-generated method stub
+		Student student = studentMapper.getStudentById(sid);
+		if (student==null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 }

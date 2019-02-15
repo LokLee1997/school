@@ -17,4 +17,5 @@ public interface StudentMapper {
 	public List<Charge> getChargesBySId(String sid);
 	public List<Attendance> getAttendancesBySid(String sid);
 	public List<Student> getStudentsByKeyWord(String keyword);
+	
 }

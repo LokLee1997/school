@@ -1,10 +1,24 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <script src="../school/js/jquery-3.1.1.js"></script>
-  
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+   
+    
+    <title>My JSP 'link.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+ 	<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function(e) {
     $.ajax({
@@ -17,21 +31,6 @@
 			for(var i in data2){
 				$("#searchbyclass").append(
 				"<li><a href='cls/clsInfo?id="+data2[i].id+"'>"+data2[i].classname+"</a></li>"
-				);
-			}
-			},
-		error:function(msg){}
-		});
-	$.ajax({
-		type:'POST',  //请求类型
-		url:'http://localhost:8080/school/ajax/getDep',
-		dataType:'json',
-		success: function(data){
-			console.log(data);
-			var data2= eval(data);
-			for(var i in data2){
-				$("#searchbydepart").append(
-				"<li><a href='dep/depInfo?did="+data2[i].did+"'>"+data2[i].dname+"</a></li>"
 				);
 			}
 			},
@@ -111,7 +110,7 @@
 								<li class="dropdown-submenu">
                     				 <a tabindex="-1" href="javascript:;">按班级查询</a>
                     					<ul class="dropdown-menu" id="searchbyclass">
-                        					
+                        					<li><a tabindex="-1" href="javascript:;">班级</a></li>
                     					</ul>
                 				</li>
 								<li>
@@ -146,8 +145,8 @@
 								</li>
 								<li class="dropdown-submenu">
                     				 <a tabindex="-1" href="javascript:;">按部门查询</a>
-                    					<ul class="dropdown-menu" id="searchbydepart">
-                        					
+                    					<ul class="dropdown-menu">
+                        					<li><a tabindex="-1" href="javascript:;">部门</a></li>
                     					</ul>
                 				</li>
 								<li class="divider">

@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="tabbable" id="tabs-39197">
 				<ul class="nav nav-tabs">
 					<li class="active">
-						 <a href="#panel-575446" data-toggle="tab">缴费列表</a>
+						 <a href="#panel-575447" data-toggle="tab">缴费列表</a>
 					</li>
 					<li>
 						 <a href="#panel-892090" data-toggle="tab">缺勤列表</a>
@@ -59,13 +59,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</ul>
 				<div class="tab-content">
 				<!-- 第一个 -->
-				<div class="tab-pane" id="panel-575446">
+				<div class="tab-pane active" id="panel-575447">
 			<c:forEach items="${cList}" var="c">
 			<table class="table table-hover">
 				<thead>
-					<tr>
-						<th>费用:</th>
-					</tr>
+					
 					<tr>
 						<th>缴费项目</th>
     					<th>需缴纳金额</th>
@@ -105,7 +103,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<c:forEach items="${aList}" var="a">
 				<thead>
 					<tr>
-						<th>缺勤记录</th>
+						<th colspan="2">
+							<a href="att/addAttUI?id=${student.sid}">添加缺勤信息</a>
+						</th>
 					</tr>
 					<tr>
 						<th>缺勤原因</th>

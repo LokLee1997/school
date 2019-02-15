@@ -23,6 +23,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+   $(document).ready(function(e) {
+    //点击验证
+	 $("#add").click(function(){ 
+							if($("#tname").val()=='' || $.trim($("#tname").val())==''){
+								alert("请输入职工姓名");
+								return false;
+							}else if($("#tbirthday").val()=='' || $.trim($("#tbirthday").val())==''){
+								alert("请输入姓名");
+								return false;
+							}else{
+							var add=document.getElementById("addtes");
+							add.submit();
+							}	
+	})	
+
+
+   $.ajax({
+		type:'POST',  //请求类型
+		url:'http://localhost:8080/school/ajax/getDep',
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			var data2= eval(data);
+			for(var i in data2){
+				$("#depart").append(
+				"<option value='"+data2[i].did+"'>"+data2[i].dname+"</option>"
+				);
+			}
+			},
+		error:function(msg){}
+		});
+   });
+   </script>
   </head>
   
   <body>
@@ -31,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="row row-centered"> 
   	<div class="col-md-6 col-md-offset-3 col-centered">
     <h2>添加教职工</h2>
-    <form class="form-horizontal" method="post" action="tes/addtes" name="addStu" id="addStu">
+    <form class="form-horizontal" method="post" action="tes/addtes" name="addtes" id="addtes">
   		<div class="form-group">
     			<label for="studentid" class="control-label col-md-3">职工姓名：</label>
                 <div class="col-md-6"> 
@@ -56,16 +90,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="form-group">
         		<label for="studentssex" class="control-label col-md-3">部门：</label>
                 <div class="col-md-6">
-        			<select name="depart" class="form-control">
-    					<option value="1">教育</option>
-    					<option value="2">后勤</option>
-    					<option value="3">行政</option>
+        			<select name="depart" id="depart" class="form-control">
+    					
     				</select>				        		
                 </div>
         </div>
         <div class="form-group">
         <div class="col-md-offset-4">
-    			<input class="btn btn-info" type="submit" value="添加"/>
+    			<input class="btn btn-info" type="button" id="add" value="添加"/>
     			<input class="btn btn-info" type="reset" value="重置"/>
     	</div>
         </div>

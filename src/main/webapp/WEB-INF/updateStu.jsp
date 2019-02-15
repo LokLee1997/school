@@ -23,6 +23,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+   $(document).ready(function(){
+    $.ajax({		  //拉去班级列表
+		type:'POST',  //请求类型
+		url:'http://localhost:8080/school/ajax/getCls',
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			var data2= eval(data);
+			for(var i in data2){
+				$("#classid").append(
+				"<option value='"+data2[i].id+"'>"+data2[i].classname+"</option>"
+				);
+			}
+			},
+		error:function(msg){}
+		});
+		
+	})
+   </script>
   </head>
   
   <body>
@@ -57,11 +77,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	<div class="form-group">
         		<label for="stateLabel" class="control-label col-md-3">班级：</label>
                 <div class="col-md-6">
-        			<select name="classid" class="form-control">
-    					<option value="1">小班一班</option>
-						<option value="2">小班二班</option>
-						<option value="3">中班一班</option>
-						<option value="5">大班一班</option>
+        			<select name="classid" class="form-control" id="classid">
+    					
     				</select>		        		
                 </div>
         </div>
