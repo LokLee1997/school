@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -60,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$("#classname").siblings('.glyphicon').addClass('glyphicon-remove');
 							$("#classnameSpan").html("<font color='red'><b>该班级已存在</b></font>");
 						}else{								
-							if($("#classname").val()!="" || $.trim($("#sid").val())!=""){
+							if($("#classname").val()!="" || $.trim($("#classname").val())!=""){
 							$("#classname").parents('.form-group').addClass('has-success');
 							$("#classname").siblings('.glyphicon').addClass('glyphicon-ok');
 							$("#classnameSpan").html("<font color='green'><b>该班级可以使用</b></font>");
@@ -88,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="row row-centered"> 
   	<div class="col-md-6 col-md-offset-3 col-centered">
     <h2>添加班级</h2>
-    <form class="form-horizontal" method="post" action="cls/addCls" name="addCls" id="addCls">
+    <form class="form-horizontal" method="post" action="cls/addCls" name="addCls" id="addCls" onsubmit="return false;">
   		<div class="form-group has-feedback">
     			<label for="classname" class="control-label col-md-3">班级名字：</label>
                 <div class="col-md-6"> 
@@ -100,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	</div>
         <div class="form-group">
         <div class="col-md-offset-4">
-    			<input class="btn btn-info" type="button" id="add" value="添加"/>
+    			<input class="btn btn-info" type="button" id="add" value="添加" onClick="if(confirm('确认信息是否正确?')==false)return false;"/>
     			<input class="btn btn-info" type="reset" value="重置"/>
     	</div>
         </div>

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -40,7 +41,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			},
 		error:function(msg){}
 		});
-		
+			//点击验证
+	 $("#update").click(function(){ 
+							if($("#sname").val()=='' || $.trim($("#sname").val())==''){
+								alert("学生姓名不能为空");
+								return false;
+							}else if($("#sbirthday").val()=='' || $.trim($("#sbirthday").val())==''){
+								alert("出生日期不能为空");
+								return false;
+							}else{
+							var add=document.getElementById("updateStu");
+							add.submit();
+							}	
+	})
 	})
    </script>
   </head>
@@ -49,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="container jumbotron well" style="background-color: #F0F0F0">
   <div class="row row-centered"> 
   	<div class="col-md-6 col-md-offset-3 col-centered">
-    <form class="form-horizontal" method="post" action="stu/updateStu" name="updateStu" id="updateStu">
+    <form class="form-horizontal" method="post" action="stu/updateStu" name="updateStu" id="updateStu" onSubmit="return false;">
   		<h2>更新学生信息</h2>
   		<input value="${student.sid}"  type="hidden" id="sid" name="sid">
   		<div class="form-group">
@@ -71,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div class="form-group">
         		<label for="priceLabel" class="control-label col-md-3">出生日期：</label>
                 <div class="col-md-6">
-        			<input class="form-control" type="text" value="${student.sbirthday}" id="sbirthday" name="sbirthday"/>				        			        		
+        			<input class="form-control" type="text" value="${student.sbirthday}" id="sbirthday" name="sbirthday" placeholder="日期格式：XXXX-XX-XX"/>				        			        		
                 </div>
         </div>
        	<div class="form-group">
@@ -84,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="form-group">
         <div class="col-md-offset-4">
-    			<input class="btn btn-info" type="submit" value="更新"/>
+    			<input class="btn btn-info" type="button" id="update" value="更新" onClick="if(confirm('确认信息是否正确?')==false)return false;"/>
     			<input class="btn btn-info" type="reset" value="重置"/>
     	</div>
         </div>

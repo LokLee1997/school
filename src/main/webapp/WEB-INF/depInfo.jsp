@@ -33,6 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h2>
 		<div><label>部门名称:${depart.dname}</label></div>
    		<div><label>部门人数:${num}</label></div>
+   		<div><label>部门简介:${depart.detail}</label></div>
    		</h2>
 			
 		</div>

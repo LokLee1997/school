@@ -12,45 +12,62 @@
 			<id property="sid" column="sid"/>
 			<result property="sname" column="sname"/>
 		</association>
+		<association property="teachers" javaType="com.school.pojo.Teachers">
+			<id property="tno" column="tno"/>
+			<result property="tname" column="tname"/>
+		</association>
 	</resultMap>
 	<!-- 根据id查询 -->
 	<select id="getChargeById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
-			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id
+			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id,t.tno,t.tname
 		from 
 			charge c
 		inner join
 			student s
 		on 
 			c.studentid=s.sid
+		left join
+			teachers t
+		on 
+			c.teacherid=t.tno
 		where 
 			c.id=#{c.id,jdbcType=INTEGER}
 	</select>
 	<!-- 获取全部 -->
 	<select id="getCharges" resultMap="BaseResultMap">
 		select
-			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id
+			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id,t.tno,t.tname
 		from 
 			charge c
 		inner join
 			student s
 		on 
 			c.studentid=s.sid
+		left join
+			teachers t
+		on 
+			c.teacherid=t.tno
 		order by
 			c.ispay,s.sid,s.sname
 	</select>
 	<!-- 根据关键字 -->
 	<select id="getChargesBykeyword" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
-			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id
+			s.sid,s.sname,c.chargeitem,c.price,c.ispay,c.id,t.tno,t.tname
 		from 
 			charge c
 		inner join
 			student s
 		on 
 			c.studentid=s.sid
+		left join
+			teachers t
+		on 
+			c.teacherid=t.tno
 		where s.sname like CONCAT('%',#{keyword},'%')
 		or c.chargeitem like CONCAT('%',#{keyword},'%')
+		or t.tname like CONCAT('%',${keyword},'%')
 	</select>
 	<insert id="addCharge" parameterType="com.school.pojo.Charge">
 		insert into charge
@@ -58,13 +75,15 @@
 			<if test="chargeitem !=null">chargeitem,</if>
 			<if test="price !=null">price,</if>
 			<if test="ispay !=null">ispay,</if>
-			<if test="studentid !=null">studentid</if>
+			<if test="studentid !=null">studentid,</if>
+			<if test="teacherid !=null">teacherid</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="chargeitem !=null">#{chargeitem,jdbcType=VARCHAR},</if>
 			<if test="price !=null">#{price,jdbcType=INTEGER},</if>
 			<if test="ispay !=null">#{ispay,jdbcType=INTEGER},</if>
-			<if test="studentid !=null">#{studentid,jdbcType=VARCHAR}</if>
+			<if test="studentid !=null">#{studentid,jdbcType=VARCHAR},</if>
+			<if test="teacherid !=null">#{teacherid,jdbcType=INTEGER}</if>
 		</trim>
 	</insert>
 	<delete id="deleteCharge" parameterType="java.lang.Integer">
@@ -84,7 +103,10 @@
 				ispay=#{ispay,jdbcType=INTEGER},
 			</if>
 			<if test="studentid != null">
-				studentid=#{studentid,jdbcType=VARCHAR}
+				studentid=#{studentid,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherid !=null">
+				teacherid=#{teacherid,jdbcType=INTEGER}
 			</if>
 		</set>
 		where id= #{id,jdbcType=INTEGER}

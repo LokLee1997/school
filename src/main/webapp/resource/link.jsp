@@ -1,24 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-   
-    
-    <title>My JSP 'link.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
- 	<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+ <script src="../school/js/jquery-3.1.1.js"></script>
+  
+
   <script type="text/javascript">
   $(document).ready(function(e) {
     $.ajax({
@@ -31,6 +20,21 @@
 			for(var i in data2){
 				$("#searchbyclass").append(
 				"<li><a href='cls/clsInfo?id="+data2[i].id+"'>"+data2[i].classname+"</a></li>"
+				);
+			}
+			},
+		error:function(msg){}
+		});
+	$.ajax({
+		type:'POST',  //请求类型
+		url:'http://localhost:8080/school/ajax/getDep',
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			var data2= eval(data);
+			for(var i in data2){
+				$("#searchbydepart").append(
+				"<li><a href='dep/depInfo?did="+data2[i].did+"'>"+data2[i].dname+"</a></li>"
 				);
 			}
 			},
@@ -110,7 +114,7 @@
 								<li class="dropdown-submenu">
                     				 <a tabindex="-1" href="javascript:;">按班级查询</a>
                     					<ul class="dropdown-menu" id="searchbyclass">
-                        					<li><a tabindex="-1" href="javascript:;">班级</a></li>
+                        					
                     					</ul>
                 				</li>
 								<li>
@@ -145,8 +149,8 @@
 								</li>
 								<li class="dropdown-submenu">
                     				 <a tabindex="-1" href="javascript:;">按部门查询</a>
-                    					<ul class="dropdown-menu">
-                        					<li><a tabindex="-1" href="javascript:;">部门</a></li>
+                    					<ul class="dropdown-menu" id="searchbydepart">
+                        					
                     					</ul>
                 				</li>
 								<li class="divider">
@@ -183,28 +187,33 @@
 					</ul>
 					
 					<ul class="nav navbar-nav navbar-right">
-   				<% if(session.getAttribute("username")!=null){%>
-                	<%if(session.getAttribute("username").equals("admin")){%>
-                		
-                		<li>
-                		<a><%=session.getAttribute("username")%></a>
-                		</li>
-                		<li><a href="exit">退出</a></li>
-                		<%}else{ %>
-                		<li>
-                		<a><%=session.getAttribute("username")%></a>
-                		</li>
-                		<li><a href="exit">退出</a></li>
-                		<%} %>  
-                 <!-- 显示登录 -->
-                 <%}else{%>
-                <li>
+                    <c:choose>
+                       <c:when test="${not empty sessionScope.user.username}">
+                    	<c:choose>
+                    		<c:when test="${sessionScope.user.username=='admin'}">
+                        		<li>
+                					<a>${sessionScope.user.username=='admin'}</a>
+                				</li>
+                        		<li>
+                        			<a href="#">添加管理员</a>
+                       			 </li>
+                				<li><a href="exit">退出</a></li>
+                       		 </c:when>
+                       		 <c:otherwise>
+                       			 <li>
+                					<a>${sessionScope.user.username}</a>
+                				</li>
+                				<li><a href="user/loginout">退出</a></li>
+                       		 </c:otherwise>
+                    	</c:choose>
+                        </c:when>
+                        <c:otherwise>
+                        	 <li>
                 	<a href="login.jsp">登录</a>
   				</li>
-                <li>
-   					<a href="regist.jsp">注册</a>
-                <li>
-                <%}%>
+                        </c:otherwise>
+                    </c:choose>
+   				
               </ul>
 				</div>
 				

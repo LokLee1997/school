@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,6 +24,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+   $(document).ready(function(e) {
+    //点击验证
+	 $("#update").click(function(){ 
+							if($("#date").val()=='' || $.trim($("#date").val())==''){
+								alert("请输入日期");
+								return false;
+							}else{
+							var add=document.getElementById("updateAtt");
+							add.submit();
+							}	
+	})
+   });
+   </script>
   </head>
   
   <body>
@@ -30,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="container jumbotron well" style="background-color: #F0F0F0">
   <div class="row row-centered"> 
   	<div class="col-md-6 col-md-offset-3 col-centered">
-    <form class="form-horizontal" method="post" action="att/updateAtt" name="updateAtt" id="updateAtt">
+    <form class="form-horizontal" method="post" action="att/updateAtt" name="updateAtt" id="updateAtt" onSubmit="return false;">
   		<h2>更新缺勤信息</h2>
   		<input value="${att.id}"  type="hidden" id="id" name="id">
   		<div class="form-group">
@@ -58,12 +73,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="form-group">
         		<label for="date" class="control-label col-md-3">缺勤日期：</label>
                 <div class="col-md-6">
-        			<input class="form-control" type="text" value="${att.date}" id="date" name="date"/>	        		
+        			<input class="form-control" type="text" value="${att.date}" id="date" name="date" placeholder="日期格式： XXXX-XX-XX"/>	        		
                 </div>
         </div>
         <div class="form-group">
         <div class="col-md-offset-4">
-    			<input class="btn btn-info" type="submit" value="更新"/>
+    			<input class="btn btn-info" type="button" id="update" value="更新" onClick="if(confirm('确认信息是否正确?')==false)return false;"/>
     			<input class="btn btn-info" type="reset" value="重置"/>
     	</div>
         </div>

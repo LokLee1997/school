@@ -8,8 +8,15 @@ import org.apache.ibatis.type.Alias;
 public class Depart {
 	private int did;
 	private String dname;
+	private String detail;
 	private List<Teachers> teachers;
 	
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 	public List<Teachers> getTeachers() {
 		return teachers;
 	}

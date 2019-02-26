@@ -9,8 +9,22 @@ public class Charge {
 	private int price;
 	private int ispay;
 	private String studentid;
+	private int teacherid;
 	private Student student;
+	private Teachers teachers;
 	private String keyword;
+	public Teachers getTeachers() {
+		return teachers;
+	}
+	public void setTeachers(Teachers teachers) {
+		this.teachers = teachers;
+	}
+	public int getTeacherid() {
+		return teacherid;
+	}
+	public void setTeacherid(int teacherid) {
+		this.teacherid = teacherid;
+	}
 	public String getKeyword() {
 		return keyword;
 	}

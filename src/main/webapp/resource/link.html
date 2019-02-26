@@ -90,9 +90,9 @@
 		<div class="col-md-12 column">
 			<nav class="navbar navbar-default" role="navigation">
             <div class="col-md-12">
-             <a class="navbar-brand" href="index.jsp" id="logo">
+             <a class="navbar-brand" id="logo">
              <h4>
-             	启航幼儿园
+             	启航幼儿园信息管理系统
              </h4>
                 </a>
             </div>
@@ -184,28 +184,48 @@
 					</ul>
 					
 					<ul class="nav navbar-nav navbar-right">
-   				<% if(session.getAttribute("username")!=null){%>
-                	<%if(session.getAttribute("username").equals("admin")){%>
-                		
-                		<li>
-                		<a><%=session.getAttribute("username")%></a>
-                		</li>
-                		<li><a href="exit">退出</a></li>
-                		<%}else{ %>
-                		<li>
-                		<a><%=session.getAttribute("username")%></a>
-                		</li>
-                		<li><a href="exit">退出</a></li>
-                		<%} %>  
-                 <!-- 显示登录 -->
-                 <%}else{%>
-                <li>
-                	<a href="login.jsp">登录</a>
-  				</li>
-                <li>
-   					<a href="regist.jsp">注册</a>
-                <li>
-                <%}%>
+					
+                    <c:choose>
+                       <c:when test="${not empty sessionScope.user.username}">
+                    	<c:choose>
+                    		<c:when test="${sessionScope.user.username=='admin'}">
+                        		<li>
+                        		<a>${sessionScope.user.username}</a>
+                        		</li>
+                        		<li class="dropdown">
+							 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理<strong class="caret"></strong></a>
+										<ul class="dropdown-menu">
+											<li><a href="user/addUserUI">添加管理员</a></li>
+                        					<li><a href="user/userList">管理员列表</a></li>
+                        					<li class="divider"></li>
+                        					<li><li><a href="user/updateUserUI?id=${sessionScope.user.id}">修改超级管理员密码</a></li></li>
+                        				</ul>
+                       			 </li>
+                				<li><a href="user/loginout">退出</a></li>
+                       		 </c:when>
+                       		 <c:otherwise>
+                       			<li>
+                					<a>${sessionScope.user.username}</a>
+                				</li>
+                				<li class="dropdown">
+							 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong class="caret"></strong></a>
+										<ul class="dropdown-menu">
+											<li><a href="user/updateUserUI?id=${sessionScope.user.id}">修改密码</a></li>
+                        					
+                        				</ul>
+                       			 </li>
+                				<li><a href="user/loginout">退出</a></li>
+                       		 </c:otherwise>
+                    	</c:choose>
+                        </c:when>
+                        <c:otherwise>
+                        	 <li>
+                				<a href="login.jsp">登录</a>
+  				   			</li>
+  				   			<li><a href="#">添加管理员</a></li>
+                        </c:otherwise>
+                    </c:choose>
+   				
               </ul>
 				</div>
 				

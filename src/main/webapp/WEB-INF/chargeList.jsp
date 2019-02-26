@@ -59,6 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<th>收费项目</th>
     		<th>收费金额</th>
     		<th>收费状态</th>
+    		<th>经手人</th>
     		<th>操作</th>
 					</tr>
 				</thead>
@@ -80,6 +81,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			</c:choose>
     				
     		
+    		</td>
+    		<td>
+    			${charge.teachers.tname}
     		</td>
     		<td>
     		<c:if test="${charge.ispay=='0'}">

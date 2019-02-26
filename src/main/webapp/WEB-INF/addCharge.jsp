@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -53,8 +54,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 			},
 		error:function(msg){}
-		});
+		})
+	$.ajax({		  
+		type:'POST',  //请求类型
+		url:'http://localhost:8080/school/ajax/getTes_acc',
+		data:{dname:$("#dname").val()},
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			var data2= eval(data);
+			for(var i in data2){
+				$("#teachertno").append(
+				"<option value='"+data2[i].tno+"'>"+data2[i].tname+"</option>"
+				);
+			}
+			},
+		error:function(msg){}
+		})
    });
+    function clearNoNum(obj)
+    {
+        //先把非数字的都替换掉，除了数字和.
+        obj.value = obj.value.replace(/[^\d.]/g,"");
+        //必须保证第一个为数字而不是.
+        obj.value = obj.value.replace(/^\./g,"");
+        //保证只有出现一个.而没有多个.
+        obj.value = obj.value.replace(/\.{2,}/g,".");
+        //保证.只出现一次，而不能出现两次以上
+        obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+    }
    </script>
   </head>
   
@@ -63,8 +91,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container jumbotron well" style="background-color: #F0F0F0">
   <div class="row row-centered"> 
   	<div class="col-md-6 col-md-offset-3 col-centered">
-    <form class="form-horizontal" method="post" action="charge/addCharge" name="addCharge" id="addCharge">
-  		<div class="form-group">
+    <form class="form-horizontal" method="post" action="charge/addCharge" name="addCharge" id="addCharge" onsubmit="return false;">
+    	<input type="hidden" id="dname" name="dname" value="财会" />
+   		<div class="form-group">
     			<label for="lunchName" class="control-label col-md-3">收费项目：</label>
                 <div class="col-md-6"> 
                 	<input class="form-control" type="text" name="chargeitem" id="chargeitem" /><span id="idSpan"></span>		                
@@ -73,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	 <div class="form-group">
         		<label for="dateLabel" class="control-label col-md-3">需缴价格：</label>
                 <div class="col-md-6">
-        			<input class="form-control" type="text" name="price" id="price" onKeyPress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/" />				        		
+        			<input class="form-control" type="text" name="price" id="price" onkeyup="clearNoNum(this)"/>				        		
                 </div>
         </div>
     	<div class="form-group">
@@ -84,7 +113,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				</select>			        		
                 </div>
         </div>
-       
+       <div class="form-group">
+        		<label for="studentname" class="control-label col-md-3">经手人：</label>
+                <div class="col-md-6">
+        			<select name="teachertno" id="teachertno" class="form-control">
+    					
+    				</select>			        		
+                </div>
+        </div>
         <div class="form-group">
         <div class="col-md-offset-4">
     			<input class="btn btn-info" type="button" id="add" value="添加" onClick="if(confirm('确认信息是否正确?')==false)return false;"/>

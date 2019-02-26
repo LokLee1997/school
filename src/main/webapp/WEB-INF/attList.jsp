@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tr>
 						<th><h2>考勤表</h2></th>
 						<th colspan="5">
-							<form class="bs-example bs-example-form" role="form" action="search/attList" method="get">
+							<form class="bs-example bs-example-form" role="form" action="search/attList" method="get" >
 							<div class="row">
 								<div align="right">
 									<div class="input-group">

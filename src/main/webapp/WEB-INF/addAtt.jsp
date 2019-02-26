@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,6 +26,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+   $(document).ready(function(e) {
+    //点击验证
+	 $("#add").click(function(){ 
+							if($("#date").val()=='' || $.trim($("#date").val())==''){
+								alert("请输入日期");
+								return false;
+							}else{
+							var add=document.getElementById("addCharge");
+							add.submit();
+							}	
+	})
+   });
+</script>
   </head>
   
   <body>
@@ -31,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container jumbotron well" style="background-color: #F0F0F0">
 	<div class="row row-centered">
 		<div class="col-md-8 col-md-offset-2 col-centered">
-			<form role="form-horizontal" action="att/addAtt" method="post" id="addAtt">
+			<form role="form-horizontal" action="att/addAtt" method="post" id="addAtt" onsubmit="return false;">
 				<input value="${student.sid}" name="studentid" type="hidden">
 				<div class="form-group">
 					 <label for="studentid" class="col-md-2 control-label" style="text-align: right;">学号：</label>
@@ -63,14 +79,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="form-group">
 					 <label for="date" class="col-md-2 control-label" style="text-align: right;">日期：</label>
 					 <div class="col-md-4 input-group input-group-sm">
-					 	<input name="date" type="text" class="form-control" placeholder="日期格式：XX-XX-XX"/>
+					 	<input id="date" name="date" type="text" class="form-control" placeholder="日期格式：XXXX-XX-XX" />
 					 </div>
 				</div>
 				
 				<div class="from-group ">
 					<div class=" col-md-offset-2 col-md-6">
-					<button type="submit" class="btn btn-default">添加</button>
-					<button type="submit" class="btn btn-default">重置</button>
+					<button type="button" id="add" class="btn btn-default" onClick="if(confirm('确认信息是否正确?')==false)return false;">添加</button>
+					<button type="reset" class="btn btn-default">重置</button>
 					</div>
 				</div>
 			</form>

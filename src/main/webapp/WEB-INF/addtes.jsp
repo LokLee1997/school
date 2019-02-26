@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -65,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="row row-centered"> 
   	<div class="col-md-6 col-md-offset-3 col-centered">
     <h2>添加教职工</h2>
-    <form class="form-horizontal" method="post" action="tes/addtes" name="addtes" id="addtes">
+    <form class="form-horizontal" method="post" action="tes/addtes" name="addtes" id="addtes" onsubmit="return false;">
   		<div class="form-group">
     			<label for="studentid" class="control-label col-md-3">职工姓名：</label>
                 <div class="col-md-6"> 
@@ -75,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="form-group">
         		<label for="studentname" class="control-label col-md-3">出生日期：</label>
                 <div class="col-md-6">
-        			<input class="form-control" type="text" name="tbirthday" id="tbirthday"/><span id="nameSpan"></span>				        		
+        			<input class="form-control" type="text" name="tbirthday" id="tbirthday" placeholder="日期格式：XXXX-XX-XX"/><span id="nameSpan"></span>				        		
                 </div>
         </div>
         <div class="form-group">
@@ -97,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="form-group">
         <div class="col-md-offset-4">
-    			<input class="btn btn-info" type="button" id="add" value="添加"/>
+    			<input class="btn btn-info" type="button" id="add" value="添加" onClick="if(confirm('确认信息是否正确?')==false)return false;"/>
     			<input class="btn btn-info" type="reset" value="重置"/>
     	</div>
         </div>

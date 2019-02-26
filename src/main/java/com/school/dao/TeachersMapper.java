@@ -14,4 +14,5 @@ public interface TeachersMapper {
 	public List<Teachers> getTeachersList();
 	public List<Classes> getTeacherClasses(int id);
 	public List<Teachers> getTeachersByKeyword(String keyword);
+	public List<Teachers> getTeachersByDepart(String dname);
 }

@@ -31,6 +31,7 @@ public class DepartController {
 	public String addDep(HttpServletRequest request,Model model){
 		Depart depart = new Depart();
 		depart.setDname(String.valueOf(request.getParameter("dname")));
+		depart.setDetail(String.valueOf(request.getParameter("detail")));
 		departService.addDep(depart);
 		return "redirect:depList";
 	}
@@ -55,6 +56,7 @@ public class DepartController {
 		int id=Integer.parseInt(request.getParameter("did"));
 		Depart depart = departService.getDepById(id);
 		depart.setDname(String.valueOf(request.getParameter("dname")));
+		depart.setDetail(String.valueOf(request.getParameter("detail")));
 		departService.updateDep(depart);
 		return "redirect:depList";
 	}

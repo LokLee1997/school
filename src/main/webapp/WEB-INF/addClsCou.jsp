@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,6 +24,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+   	$(document).ready(function(e) {
+        //课程名称验证
+		 $.ajax({
+		type:'POST',  //请求类型
+		url:'http://localhost:8080/school/ajax/getCou',
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			var data2= eval(data);
+			for(var i in data2){
+				$("#courseno").append(
+				"<option value='"+data2[i].cno+"'>"+data2[i].cname+"</option>"
+				);
+			}
+			},
+		error:function(msg){}
+		});
+	})
+   </script>
   </head>
   
   <body>
@@ -42,16 +63,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="form-group">
         		<label for="coursename" class="control-label col-md-3">课程：</label>
                 <div class="col-md-6">
-    				<select name="courseno" class="form-control">
-    						<option value="1">数学</option>
-    						<option value="2">美术</option>
-    						<option value="3">手工</option>
+    				<select name="courseno" id="courseno" class="form-control">
+    						
     				</select>				        		
                 </div>
         </div>
         <div class="form-group">
         <div class="col-md-offset-4">
-    			<input class="btn btn-info" type="submit" value="添加"/>
+    			<input class="btn btn-info" type="submit" value="添加" onClick="if(confirm('确认信息是否正确?')==false)return false;"/>
     	</div>
         </div>
         </form>

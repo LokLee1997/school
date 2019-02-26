@@ -14,4 +14,5 @@ public interface TeachersService {
 	public List<Teachers> gettes();
 	public List<Classes> getClasses(int id);
 	public List<Teachers> getTeachersByKeyword(String keyword);
+	public List<Teachers> getTeachersByDepart(String dname);
 }

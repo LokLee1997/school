@@ -32,6 +32,7 @@ public class ChargeController {
 		charge.setChargeitem(String.valueOf(request.getParameter("chargeitem")));
 		charge.setPrice(Integer.parseInt(request.getParameter("price")));
 		charge.setStudentid(String.valueOf(request.getParameter("studentid")));
+		charge.setTeacherid(Integer.parseInt(request.getParameter("teachertno")));
 		chargeService.addCharge(charge);
 		return "redirect:chargeList";
 	}
@@ -63,6 +64,7 @@ public class ChargeController {
 		charge.setChargeitem(String.valueOf(request.getParameter("chargeitem")));
 		charge.setPrice(Integer.parseInt(request.getParameter("price")));
 		charge.setIspay(Integer.parseInt(request.getParameter("ispay")));
+		charge.setTeacherid(Integer.parseInt(request.getParameter("teachertno")));
 		chargeService.updateCharge(charge);
 		return "redirect:chargeList";
 	}

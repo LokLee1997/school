@@ -42,6 +42,20 @@
        
        <mvc:resources location="/js/" mapping="/js/**"/>
        <mvc:resources location="/css/" mapping="/css/**"/>
+       <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/att/**"/>
+            <mvc:mapping path="/charge/**"/>
+            <mvc:mapping path="/cls/**"/>
+            <mvc:mapping path="/cou/**"/>
+            <mvc:mapping path="/dep/**"/>
+            <mvc:mapping path="/lunch/**"/>
+            <mvc:mapping path="/stu/**"/>
+            <mvc:mapping path="/tes/**"/>
+            
+            <bean class="com.school.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor> 
+    </mvc:interceptors>
        <bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         	<property name="prefix" value="/WEB-INF/"/>

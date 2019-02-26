@@ -77,6 +77,20 @@
 	    on 
 	    	t.depart=d.did
 	</select>
+	<!--通过部门id获取教师列表-->
+	<select id="getTeachersByDepart" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select 
+			t.tno,t.tname,d.dname
+		from 
+			teachers t
+		LEFT JOIN
+			depart d
+		ON
+			t.depart=d.did
+		WHERE 
+			d.dname=#{d.dname,jdbcType=INTEGER}
+	
+	</select>
 	<insert id="addTeachers" parameterType="com.school.pojo.Teachers">
 		insert into teachers
 		<trim prefix="(" suffix=")" suffixOverrides=",">

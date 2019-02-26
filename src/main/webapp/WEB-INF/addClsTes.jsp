@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,6 +24,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.1.1.js"></script>
    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+   	$(document).ready(function(e) {
+        //课程名称验证
+		 $.ajax({
+		type:'POST',  //请求类型
+		url:'http://localhost:8080/school/ajax/getTes_edu',
+		data:{dname:$("#dname").val()},
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			var data2= eval(data);
+			for(var i in data2){
+				$("#teachertno").append(
+				"<option value='"+data2[i].tno+"'>"+data2[i].tname+"</option>"
+				);
+			}
+			},
+		error:function(msg){}
+		});
+	})
+   </script>
   </head>
   
   <body>
@@ -32,6 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div class="col-md-6 col-md-offset-3 col-centered">
     <h2>添加班级教师</h2>
     <form class="form-horizontal" method="post" action="cls/addClsTes" name="addClsTes" id="addClsTes">
+    	<input type="hidden" name="dname" id="dname" value="教育" />
   		<div class="form-group">
   				<input type="hidden" value="${classes.id}" id="classid" name="classid">
     			<label for="classnamelabel" class="control-label col-md-3">班级名字：</label>
@@ -42,16 +65,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="form-group">
         		<label for="teachername" class="control-label col-md-3">教师：</label>
                 <div class="col-md-6">
-    				<select name="teachertno" class="form-control">
-    					<option value="1">李成才</option>
-    					<option value="3">王萍</option>
-    					<option value="4">刘斌</option>
+    				<select name="teachertno" id="teachertno" class="form-control">
+    					
     				</select>	
                 </div>
         </div>
         <div class="form-group">
         <div class="col-md-offset-4">
-    			<input class="btn btn-info" type="submit" value="添加"/>
+    			<input class="btn btn-info" type="submit" value="添加" onclick="if(confirm('确认信息是否正确?')==false)return false;"/>
     	</div>
         </div>
         </form>
