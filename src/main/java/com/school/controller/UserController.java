@@ -37,6 +37,7 @@ public class UserController {
 		System.out.println(username+password);
 		if (flag==true) {
 			User user = new User();
+			user.setId(userService.getUserIdByUsername(username));
 			user.setUsername(username);
 			user.setPassword(password);
 			model.addAttribute("user",user);

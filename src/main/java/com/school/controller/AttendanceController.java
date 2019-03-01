@@ -30,6 +30,7 @@ public class AttendanceController {
 	public String addAttUI(HttpServletRequest request,Model model){
 		String id = String.valueOf(request.getParameter("id"));
 		Student student = studentService.getStudentById(id);
+		System.out.println(student);
 		model.addAttribute("student",student);
 		return "addAtt";
 	}

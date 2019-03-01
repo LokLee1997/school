@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.school.dao.StudentMapper;
 import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
+import com.school.pojo.Hobby;
 import com.school.pojo.Student;
 import com.school.service.StudentService;
 @Transactional
@@ -40,6 +41,8 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student getStudentById(String sid) {
 		// TODO Auto-generated method stub
+		System.out.println(sid);
+		System.out.println(studentMapper.getStudentById(sid));
 		return studentMapper.getStudentById(sid);
 	}
 
@@ -100,5 +103,12 @@ public class StudentServiceImpl implements StudentService {
 			return false;
 		}
 		
+	}
+
+	@Override
+	public List<Hobby> getHobbiesBySid(String sid) {
+		// TODO Auto-generated method stub
+		List<Hobby> list = studentMapper.getHobbiesBySId(sid);
+		return list;
 	}
 }

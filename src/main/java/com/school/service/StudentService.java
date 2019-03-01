@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
+import com.school.pojo.Hobby;
 import com.school.pojo.Student;
 
 public interface StudentService {
@@ -15,6 +16,7 @@ public interface StudentService {
 	public int getStuNum();
 	public List<Student> getStudentsByClass(int id);
 	public List<Charge> getChargesBySid(String sid);
+	public List<Hobby> getHobbiesBySid(String sid);
 	public List<Attendance> getAttendancesBySid(String sid);
 	public void setStudentCls(Student student);
 	public List<Student> getStudentsByKeyWord(String keyword);

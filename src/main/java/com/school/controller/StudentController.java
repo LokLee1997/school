@@ -14,7 +14,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
+import com.school.pojo.Hobby;
 import com.school.pojo.Student;
+import com.school.service.Stu_HobbyService;
 import com.school.service.StudentService;
 
 @Controller
@@ -22,7 +24,8 @@ import com.school.service.StudentService;
 public class StudentController {
 	@Resource
 	private StudentService studentService;
-	
+	@Resource
+	private Stu_HobbyService stu_HobbyService;
 
 	@RequestMapping("/addStuUI")
 	public String addStuUI(){
@@ -72,9 +75,11 @@ public class StudentController {
 	public String showStu(HttpServletRequest request,Model model){
 		String id =String.valueOf(request.getParameter("sid"));
 		Student student = studentService.getStudentById(id);
+		List<Hobby> hList = studentService.getHobbiesBySid(id);
 		List<Charge> cList = studentService.getChargesBySid(id);
 		List<Attendance> aList = studentService.getAttendancesBySid(id);
 		model.addAttribute("student",student);
+		model.addAttribute("hList",hList);
 		model.addAttribute("cList",cList);
 		model.addAttribute("aList",aList);
 		return "stuInfo";
@@ -88,5 +93,32 @@ public class StudentController {
 		model.addAttribute("page",p);
 		model.addAttribute("list",list);
 		return "stuList";
+	}
+	
+	@RequestMapping("/hobbyList")
+	public String hobbyList(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model model){
+		PageHelper.startPage(page,10);
+		String id =String.valueOf(request.getParameter("sid"));
+		Student student = studentService.getStudentById("2016001");
+		System.out.println(student);
+		List<Hobby> list = stu_HobbyService.getHobbiesBySid(id);
+		PageInfo<Hobby> p=new PageInfo<Hobby>(list);
+		model.addAttribute("student",student);
+		model.addAttribute("page",p);
+		model.addAttribute("list",list);
+		return "hobbyList";
+	}
+	@RequestMapping("/addhobbyUI")
+	public String addhobbyUI(HttpServletRequest request,Model model){
+		String id =String.valueOf(request.getParameter("sid"));
+		Student student = studentService.getStudentById(id);
+		System.out.println(student);
+		model.addAttribute("student",student);
+		return "addhobby";
+	}
+	@RequestMapping("/addhobby")
+	public String addhobby(HttpServletRequest request,Model model){
+		String sid=String.valueOf(request.getParameter("sid"));
+		return "redirect:stuInfo";
 	}
 }

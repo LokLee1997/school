@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.school.pojo.Classes;
 import com.school.pojo.Course;
 import com.school.pojo.Depart;
+import com.school.pojo.Hobby;
 import com.school.pojo.Student;
 import com.school.pojo.Teachers;
 import com.school.pojo.User;
@@ -25,6 +26,7 @@ import com.school.service.AttendanceService;
 import com.school.service.ClassesService;
 import com.school.service.CourseService;
 import com.school.service.DepartService;
+import com.school.service.Stu_HobbyService;
 import com.school.service.StudentService;
 import com.school.service.TeachersService;
 import com.school.service.UserService;
@@ -44,6 +46,9 @@ public class AjaxController {
 	private CourseService courseService;
 	@Resource
 	private UserService userService;
+	@Resource
+	private Stu_HobbyService stu_HobbyService;
+	
 	//获取班级列表
 	@RequestMapping(value="getCls")
 	@ResponseBody
@@ -118,6 +123,37 @@ public class AjaxController {
 			
 		}
 	}
+	//检查兴趣是否重复
+	@RequestMapping(value="checkhobby")
+	@ResponseBody
+	public void checkhobby(@RequestParam("hobby") String hobby,@RequestParam("studentid") String studentid,HttpServletResponse response){
+		List<Hobby> list = stu_HobbyService.getHobbiesBySid(studentid);
+		boolean flag=false;
+		for (Hobby hobby2 : list) {
+			if (hobby2.getHobby().equals(hobby)) {
+				flag = true;
+			}
+		}
+		if (flag==true) {
+			System.out.println(flag);
+			String result = "true";
+			try {
+				response.getWriter().write(result);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}else {
+			System.out.println(flag);
+			String result = "false";
+			try {
+				response.getWriter().write(result);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+		}
+	}
+	
 	//获取学生列表
 	@RequestMapping(value="getStu")
 	@ResponseBody

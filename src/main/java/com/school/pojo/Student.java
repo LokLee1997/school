@@ -14,7 +14,14 @@ public class Student {
 	private Classes classes;
 	private List<Charge> charge;
 	private List<Attendance> attendances;
+	private List<Hobby> hobbies;
 	private String keyword;
+	public List<Hobby> getHobbies() {
+		return hobbies;
+	}
+	public void setHobbies(List<Hobby> hobbies) {
+		this.hobbies = hobbies;
+	}
 	public String getKeyword() {
 		return keyword;
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.school.pojo.Attendance;
 import com.school.pojo.Charge;
+import com.school.pojo.Hobby;
 import com.school.pojo.Student;
 
 public interface StudentMapper {
@@ -17,5 +18,6 @@ public interface StudentMapper {
 	public List<Charge> getChargesBySId(String sid);
 	public List<Attendance> getAttendancesBySid(String sid);
 	public List<Student> getStudentsByKeyWord(String keyword);
+	public List<Hobby> getHobbiesBySId(String sid);
 	
 }

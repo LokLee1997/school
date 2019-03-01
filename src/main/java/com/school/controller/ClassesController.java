@@ -75,7 +75,7 @@ public class ClassesController {
 		teacherclass.setTeachertno(Integer.parseInt(request.getParameter("teachertno")));
 		teacherClassService.addTeacher_Class(teacherclass);
 		int id = Integer.parseInt(request.getParameter("classid"));
-		return "redirect:clsInfo?id="+5;
+		return "redirect:clsInfo?id="+id;
 	}
 	@RequestMapping("/delCls")
 	public String delCls(HttpServletRequest request){

@@ -11,6 +11,7 @@ public interface UserMapper {
 	void userDelete(Integer id);
 	List<User> getUsers();
 	User getUserByUsername(String username);
+	
 	User getUserById(Integer id);
 	
 }

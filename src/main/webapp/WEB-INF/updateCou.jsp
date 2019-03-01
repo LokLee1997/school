@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							add.submit();
 							}
 						}else{
-							if($("#classname").val()=='' || $.trim($("#classname").val())==''){
+							if($("#cname").val()=='' || $.trim($("#cname").val())==''){
 								alert("课程不能为空，请重新输入");
 								return false;
 							}else{

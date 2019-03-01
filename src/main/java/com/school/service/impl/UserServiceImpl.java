@@ -68,6 +68,13 @@ public class UserServiceImpl implements UserService {
 			return false;//用户名不可用
 		}
 	}
+
+	@Override
+	public int getUserIdByUsername(String username) {
+		// TODO Auto-generated method stub
+		User user = userMapper.getUserByUsername(username);
+		return user.getId();
+	}
 	
 	
 

@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								alert("请输入日期");
 								return false;
 							}else{
-							var add=document.getElementById("addCharge");
+							var add=document.getElementById("addAtt");
 							add.submit();
 							}	
 	})

@@ -30,20 +30,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container jumbotron well" style="background-color: #F0F0F0">
 	<div class="row clearfix">
 		<div class="col-md-8 col-md-offset-2 column">
-		<div style="text-align: right"><a href="stu/updateStuUI?sid=${student.sid}"><input type="button" class="btn btn-default" value="更新学生信息"></a></div>
-		<div style="background:#F0F0F0">
-			<h4>
-				<div style="width:33%; float: left;"><label>学生学号:${student.sid}</label>
-    			<label>学生姓名:${student.sname}</label></div>
-    			<div><label>学生性别:${student.ssex}</label><br>
-    			<label>出生日期:${student.sbirthday}</label></div>
-    			<div><label>学生班级:${student.classes.classname}</label></div>
-    		</h4>
+			<div style="text-align: right"><a href="stu/updateStuUI?sid=${student.sid}"><input type="button" class="btn btn-default" value="更新学生信息"></a></div>
+				<div style="background:#F0F0F0">
+					<h4>
+						<div style="width:33%; float: left;"><label>学生学号:${student.sid}</label>
+    					<label>学生姓名:${student.sname}</label></div>
+    					<div><label>学生性别:${student.ssex}</label><br>
+    					<label>出生日期:${student.sbirthday}</label></div>
+    					<div><label>学生班级:${student.classes.classname}</label></div>
+    				</h4>
+				</div>
+			</div>
 		</div>
-		</div>
-		</div>
-		</div>
-    	
+	</div>
+	<c:forEach items="${hList}" var="h">
+    	<div class="container jumbotron well">
+			<div class="row clearfix">
+				<div class="col-md-8 col-md-offset-2">
+				<div style="float: left"><h4>学生兴趣爱好</h4></div>
+				<div style="text-align: right;">
+					<a href="hobby/addhobbyUI?sid=${student.sid}">
+						<input type="button" class="btn btn-default" value="添加">
+					</a>
+					<a href="hobby/hobbyList?sid=${student.sid}">
+						<input type="button" class="btn btn-default" value="管理">
+					</a>
+				</div>
+    				<c:forEach items="${h.hobbies}" var="h">
+    					<font size="+1">${h.hobby}&nbsp</font>
+    				</c:forEach>
+				</div>
+			</div>
+		</div>		
+	</c:forEach>
+	
 	<div class="container jumbotron well ">
 	<div class="row clearfix ">
     	<div class="col-md-8 col-md-offset-2 ">
@@ -90,8 +110,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</c:forEach>
     		</tr>
 				</tbody>
+				</table>
 		</c:forEach>
-			</table>
+			
 		</div>
 					<!-- 第一个结束-->
 					<div class="tab-pane" id="panel-892090">
@@ -136,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>	
-
+</div>
  
   </body>
 </html>

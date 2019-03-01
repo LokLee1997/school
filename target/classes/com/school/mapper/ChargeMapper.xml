@@ -65,9 +65,9 @@
 			teachers t
 		on 
 			c.teacherid=t.tno
-		where s.sname like CONCAT('%',#{keyword},'%')
-		or c.chargeitem like CONCAT('%',#{keyword},'%')
-		or t.tname like CONCAT('%',${keyword},'%')
+		where s.sname LIKE CONCAT('%',#{keyword},'%')
+		or c.chargeitem LIKE CONCAT('%',#{keyword},'%')
+		or t.tname LIKE CONCAT('%',#{keyword},'%')
 	</select>
 	<insert id="addCharge" parameterType="com.school.pojo.Charge">
 		insert into charge

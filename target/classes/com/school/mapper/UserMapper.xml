@@ -11,6 +11,7 @@
 	<select id="getUserByUsername" parameterType="String" resultMap="BaseResultMap">
 		SELECT * FROM user WHERE username=#{username}
 	</select>
+	
 	<select id="getUsers" resultMap="BaseResultMap">
 		SELECT * FROM user
 	</select>

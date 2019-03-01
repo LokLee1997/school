@@ -12,4 +12,5 @@ public interface UserService {
 	void userDelete(Integer id);
 	List<User> getUsers();
 	User getUserById(Integer id);
+	int getUserIdByUsername(String username);
 }
